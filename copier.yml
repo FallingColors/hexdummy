@@ -128,7 +128,7 @@ gradle_mod_version_key:
 
 # Copier settings
 
-_subdirectory: "templates/{{ minecraft_version }}"
+_subdirectory: template
 
 _answers_file: .copier-answers.hexdummy.yml
 
