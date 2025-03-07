@@ -8,10 +8,10 @@ import kotlin.io.path.div
 
 plugins {
     id("{{ modid }}.java")
-    id("{{ modid }}.utils.json5")
 
     `maven-publish`
     id("dev.architectury.loom")
+    id("at.petra-k.pkpcpbp.PKJson5Plugin")
 }
 
 val modId: String by project
@@ -22,6 +22,11 @@ base.archivesName = "${modId}-$platform"
 loom {
     silentMojangMappingsLicense()
     accessWidenerPath = project(":{{ common_path }}").file("src/main/resources/{{ modid }}.accesswidener")
+}
+
+pkJson5 {
+    autoProcessJson5 = true
+    autoProcessJson5Flattening = true
 }
 
 dependencies {

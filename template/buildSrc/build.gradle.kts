@@ -23,9 +23,7 @@ dependencies {
     implementation(libs.plugins.architectury.loom.toLibrary())
     implementation(libs.plugins.shadow.toLibrary())
     implementation(libs.plugins.modPublish.toLibrary())
-
-    // libraries used by script plugins
-    implementation(libs.pkpcpbp)
+    implementation(libs.plugins.pkJson5.toLibrary())
 
     // https://stackoverflow.com/a/70878181
     // https://github.com/gradle/gradle/issues/15383
