@@ -2,6 +2,8 @@
 
 package hexdummy
 
+import libs
+
 plugins {
     id("hexdummy.minecraft")
     id("hexdummy.utils.mod-dependencies")
