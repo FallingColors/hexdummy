@@ -3,13 +3,14 @@
 package hexdummy
 
 import kotlin.io.path.div
+import libs
 
 plugins {
     id("hexdummy.java")
-    id("hexdummy.utils.json5")
 
     `maven-publish`
     id("dev.architectury.loom")
+    id("at.petra-k.pkpcpbp.PKJson5Plugin")
 }
 
 val modId: String by project
@@ -20,6 +21,11 @@ base.archivesName = "${modId}-$platform"
 loom {
     silentMojangMappingsLicense()
     accessWidenerPath = project(":common").file("src/main/resources/hexdummy.accesswidener")
+}
+
+pkJson5 {
+    autoProcessJson5 = true
+    autoProcessJson5Flattening = true
 }
 
 dependencies {

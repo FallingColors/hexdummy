@@ -2,6 +2,8 @@
 
 package hexdummy
 
+import libs
+
 plugins {
     java
     kotlin("jvm")

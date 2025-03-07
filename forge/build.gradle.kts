@@ -23,9 +23,9 @@ loom {
                 "--mod", modId,
                 "--all",
                 // we use forge to do the common datagen because fabric's datagen kind of sucks
-                "--output", project(":Common").file("src/generated/resources").absolutePath,
+                "--output", project(":common").file("src/generated/resources").absolutePath,
                 "--existing", file("src/main/resources").absolutePath,
-                "--existing", project(":Common").file("src/main/resources").absolutePath,
+                "--existing", project(":common").file("src/main/resources").absolutePath,
             )
             property("hexdummy.apply-datagen-mixin", "true")
         }
