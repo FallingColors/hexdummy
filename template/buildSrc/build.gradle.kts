@@ -32,6 +32,12 @@ dependencies {
     implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(libs.versions.java.get())
+    }
+}
+
 // support declaring dependencies on libs.plugins.*
 
 fun ProviderConvertible<PluginDependency>.toLibrary() = asProvider().toLibrary()
