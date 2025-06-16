@@ -20,3 +20,4 @@ Further instructions TODO - look at [HexDebug](https://github.com/object-Object/
 - Finish adding Yarn support.
 - See if there's a better way to download dependencies for CI tests than just manually listing Modrinth URLs.
 - Improve documentation.
+- Investigate https://github.com/headlesshq/mc-server-test more. From the logs, it seems like the Fabric server test might not actually be loading any mods?
