@@ -13,7 +13,10 @@ loom {
         convertAccessWideners = true
         extraAccessWideners.add(loom.accessWidenerPath.get().asFile.name)
 
-        mixinConfig("hexdummy-common.mixins.json", "hexdummy.mixins.json")
+        mixinConfig(
+            "hexdummy-common.mixins.json",
+            "hexdummy-forge.mixins.json",
+        )
     }
 
     runs {
@@ -63,11 +66,17 @@ dependencies {
     modImplementation(libs.paucal.forge)
     modLocalRuntime(libs.patchouli.forge)
     modLocalRuntime(libs.caelus)
+    modLocalRuntime(libs.inline.forge) { isTransitive = false }
 
     modApi(libs.clothConfig.forge)
 
-    libs.mixinExtras.also {
-        implementation(it)
+    libs.mixinExtras.common.also {
+        compileOnly(it)
+        annotationProcessor(it)
+    }
+
+    libs.mixinExtras.forge.also {
+        localRuntime(it)
         include(it)
     }
 }

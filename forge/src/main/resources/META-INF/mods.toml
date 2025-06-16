@@ -4,10 +4,10 @@ license = "MIT"
 
 [[mods]]
 modId = "hexdummy"
-version = "${modVersion}"
+version = "${version}"
 displayName = "Hex Dummy"
-logoFile = "icon.png"
-authors = "artynova"
+logoFile = "assets/hexdummy/icon.png"
+authors = "FallingColors"
 description = "Hex Dummy addon for Hex Casting"
 
 [[dependencies.hexdummy]]
@@ -41,6 +41,6 @@ side = "BOTH"
 [[dependencies.hexdummy]]
 modId = "hexcasting"
 mandatory = true
-versionRange = "[${versions.hexcasting},)"
+versionRange = "[${versions.hexcasting_dependency},)"
 ordering = "NONE"
 side = "BOTH"

@@ -1,8 +1,11 @@
 // A convention plugin that should be applied to all subprojects corresponding to a specific modloader/platform, such as fabric and forge.
 
+@file:Suppress("UnstableApiUsage")
+
 package hexdummy
 
 import libs
+import kotlin.io.path.div
 
 plugins {
     id("hexdummy.minecraft")
@@ -55,6 +58,15 @@ sourceSets {
 }
 
 tasks {
+    val ciArtifacts = register<Copy>("ciArtifacts") {
+        from(remapJar)
+        into(rootDir.toPath() / "build" / "ciArtifacts")
+    }
+
+    build {
+        dependsOn(ciArtifacts)
+    }
+
     shadowJar {
         exclude("architectury.common.json")
         configurations = listOf(project.configurations["shadowCommon"])
@@ -83,7 +95,7 @@ publishMods {
     val isDryRun = (System.getenv("DRY_RUN") ?: "").isNotBlank()
     dryRun = !isCI || isDryRun
 
-    type = BETA
+    type = STABLE
     changelog = provider { getLatestChangelog() }
     file = tasks.remapJar.flatMap { it.archiveFile }
 
@@ -99,6 +111,7 @@ publishMods {
         accessToken = System.getenv("CURSEFORGE_TOKEN") ?: ""
         projectId = curseforgeId
         minecraftVersions.add(minecraftVersion)
+        // TODO: update if your mod is only client-side or server-side!
         clientRequired = true
         serverRequired = true
     }
