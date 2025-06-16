@@ -20,6 +20,7 @@
 ### Notes
 
 - Most of the non-Gradle files do not yet have Yarn support. As such, **Mojmap is highly recommended** for the time being, unless you know what you're doing and are fine with manually converting the code to Yarn.
+- This version of the template is very new and untested, so please [open an issue](https://github.com/FallingColors/hexdummy/issues) if you find any bugs.
 
 ## `0.0.2` - 2023-08-26
 
