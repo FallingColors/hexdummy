@@ -2,7 +2,7 @@
 
 ## `2.0.0` - 2025-06-16
 
-## Additions
+### Additions
 
 - Added support for Kotlin.
 - Added GitHub Actions workflows for building and testing the mod on every push and pull request, deploying the hexdoc book, and releasing new versions of the mod to CurseForge and Modrinth using the GitHub UI.
@@ -10,7 +10,7 @@
 - Integrated hexdoc directly into the template, instead of requiring users to set up `hexdoc-hexcasting-template` separately.
 - Added json5 support via [PKPCPBP](<https://github.com/gamma-delta/PKPCPBP/>).
 
-## Changes
+### Changes
 
 - Updated to Hex Casting 0.11.2!
 - Completely rewrote the entire template from the ground up.
