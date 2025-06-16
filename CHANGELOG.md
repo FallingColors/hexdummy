@@ -6,6 +6,7 @@
 
 - Fixed an "invalid workflow file" error when trying to run the release workflow.
 - Fixed a potential issue where running the release workflow in "dry run" mode would still deploy the hexdoc book to GitHub Pages.
+- Fixed a potential issue where the build workflow would never build in release mode.
 
 ## `2.0.0` - 2025-06-16
 

@@ -9,6 +9,8 @@ on:
   pull_request:
   workflow_call:
     inputs:
+      mod_release:
+        type: boolean
       hexdoc_release:
         type: boolean
       dry_run:
@@ -37,6 +39,8 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
 
       - name: Build mod
+        env:
+          RELEASE: {{ var("inputs.mod_release == true") }}
         run: ./gradlew build
 
       # if this step fails, you need to run your datagen and commit the updated files
