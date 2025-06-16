@@ -1,5 +1,7 @@
 // A convention plugin that should be applied to all Minecraft-related subprojects, including common.
 
+@file:Suppress("UnstableApiUsage")
+
 package hexdummy
 
 import kotlin.io.path.div
@@ -21,6 +23,13 @@ base.archivesName = "${modId}-$platform"
 loom {
     silentMojangMappingsLicense()
     accessWidenerPath = project(":common").file("src/main/resources/hexdummy.accesswidener")
+
+    mixin {
+        // the default name includes both archivesName and the subproject, resulting in the platform showing up twice
+        // default: hexdummy-common-common-refmap.json
+        // fixed:   hexdummy-common.refmap.json
+        defaultRefmapName = "${base.archivesName.get()}.refmap.json"
+    }
 }
 
 pkJson5 {
@@ -47,16 +56,5 @@ sourceSets {
         resources {
             srcDir(file("src/generated/resources"))
         }
-    }
-}
-
-tasks {
-    val artifactsTask = register<Copy>("githubArtifacts") {
-        from(remapJar, remapSourcesJar, get("javadocJar"))
-        into(rootDir.toPath() / "build" / "githubArtifacts")
-    }
-
-    build {
-        dependsOn(artifactsTask)
     }
 }

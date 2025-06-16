@@ -1,35 +1,36 @@
 {
   "schemaVersion": 1,
   "id": "hexdummy",
-  "version": "${modVersion}",
+  "version": "${version}",
   "name": "Hex Dummy",
   "description": "Hex Dummy addon for Hex Casting",
   "authors": [
-    "artynova"
+    "FallingColors"
   ],
   "contact": {
-    "homepage": "https://artynova.github.io/hexdummy",
-    "sources": "https://github.com/artynova/hexdummy"
+    "homepage": "https://fallingcolors.github.io/hexdummy",
+    "sources": "https://github.com/FallingColors/hexdummy"
   },
   "license": "MIT",
-  "icon": "icon.png",
+  "icon": "assets/hexdummy/icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [{
       "adapter": "kotlin",
-      "value": "io.github.artynova.hexdummy.fabric.FabricHexDummy"
+      "value": "io.github.fallingcolors.hexdummy.fabric.FabricHexDummy"
     }],
     "client": [{
       "adapter": "kotlin",
-      "value": "io.github.artynova.hexdummy.fabric.FabricHexDummyClient"
+      "value": "io.github.fallingcolors.hexdummy.fabric.FabricHexDummyClient"
     }],
     "modmenu": [{
       "adapter": "kotlin",
-      "value": "io.github.artynova.hexdummy.fabric.FabricHexDummyModMenu"
+      "value": "io.github.fallingcolors.hexdummy.fabric.FabricHexDummyModMenu"
     }]
   },
   "mixins": [
-    "hexdummy-common.mixins.json"
+    "hexdummy-common.mixins.json",
+    "hexdummy-fabric.mixins.json"
   ],
   "depends": {
     "minecraft": "${versions.minecraft}",
@@ -37,7 +38,7 @@
     "fabric-api": ">=${versions.fabric_api}",
     "fabric-language-kotlin": ">=${versions.kotlin_fabric}",
     "architectury": ">=${versions.architectury}",
-    "hexcasting": ">=${versions.hexcasting}",
+    "hexcasting": ">=${versions.hexcasting_dependency}",
     "cloth-config": ">=${versions.clothConfig}"
   },
   "suggests": {

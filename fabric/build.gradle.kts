@@ -52,11 +52,12 @@ dependencies {
     modLocalRuntime(libs.cardinalComponents)
     modLocalRuntime(libs.serializationHooks)
     modLocalRuntime(libs.trinkets)
+    modLocalRuntime(libs.inline.fabric) { isTransitive = false }
 
-    // this is also a Hex dependency, but it's included in case you want to use it for stuff
-    libs.mixinExtras.also {
-        implementation(it)
+    libs.mixinExtras.fabric.also {
+        localRuntime(it)
         include(it)
+        annotationProcessor(it)
     }
 
     modApi(libs.clothConfig.fabric) {
@@ -66,8 +67,6 @@ dependencies {
 }
 
 publishMods {
-    modLoaders.add("quilt")
-
     // this fails if we do it for all projects, since the tag already exists :/
     // see https://github.com/modmuss50/mod-publish-plugin/issues/3
     github {
@@ -83,7 +82,6 @@ publishMods {
 
 tasks {
     named("publishGithub") {
-        dependsOn(project(":common").tasks.remapJar)
         dependsOn(project(":forge").tasks.remapJar)
 
         // we need to do this here so that it waits until forge is already configured
@@ -91,7 +89,6 @@ tasks {
         publishMods {
             github {
                 additionalFiles.from(
-                    project(":common").tasks.remapJar.get().archiveFile,
                     project(":forge").tasks.remapJar.get().archiveFile,
                 )
             }

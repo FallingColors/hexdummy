@@ -16,9 +16,9 @@ parchment = "2023.09.03"
 
 architectury = "9.2.14"
 architectury-plugin = { require="[3.4, 3.5[" }
-architectury-loom = { require="[1.5, 1.6[" }
+architectury-loom = { require="[1.7, 1.8[" }
 
-fabric-loader = "0.14.21"
+fabric-loader = "0.14.25"
 fabric-api = "0.85.0+1.20.1"
 
 forge = "1.20.1-47.2.0"
@@ -26,21 +26,25 @@ forge-dependency = "47" # for mods.toml
 
 # mods
 
-hexcasting = "0.11.1-7-pre-636"
+# 0.11.2-pre-701 corresponds to the build of 0.11.2 on CurseForge/Modrinth
+hexcasting = "0.11.2-pre-701"
+# FIXME: this should be 0.11.2, but that breaks the dev environment
+hexcasting-dependency = "0.11.1"
 paucal = "0.6.0-pre-118"
 pkpcpbp = "0.2.0-pre-95"
 
 patchouli = "1.20.1-84"
-patchouli-fabric = "1.20.1-84-FABRIC" # thanks vazkii
+patchouli-fabric = "1.20.1-84-FABRIC"
 patchouli-forge = "1.20.1-84-FORGE"
 
 trinkets = "3.7.0"
 
 cardinalComponents = "5.2.1"
 serializationHooks = "0.4.99999"
-mixinExtras = "0.1.1"
+mixinExtras = "0.4.1"
 clothConfig = "11.1.106"
 modMenu = "7.1.0"
+inline = "1.20.1-1.0.1"
 
 caelus = "3.1.0+1.20"
 
@@ -86,14 +90,20 @@ patchouli-forge  = { module="vazkii.patchouli:Patchouli", version.ref="patchouli
 trinkets = { module="dev.emi:trinkets", version.ref="trinkets" }
 
 cardinalComponents = { module="dev.onyxstudios.cardinal-components-api:cardinal-components-api", version.ref="cardinalComponents" }
-mixinExtras        = { module="com.github.LlamaLad7:MixinExtras", version.ref="mixinExtras" }
 modMenu            = { module="com.terraformersmc:modmenu", version.ref="modMenu" }
+
+mixinExtras-common = { module="io.github.llamalad7:mixinextras-common", version.ref="mixinExtras" }
+mixinExtras-fabric = { module="io.github.llamalad7:mixinextras-fabric", version.ref="mixinExtras" }
+mixinExtras-forge  = { module="io.github.llamalad7:mixinextras-forge", version.ref="mixinExtras" }
 
 clothConfig-common = { module="me.shedaniel.cloth:cloth-config", version.ref="clothConfig" }
 clothConfig-fabric = { module="me.shedaniel.cloth:cloth-config-fabric", version.ref="clothConfig" }
 clothConfig-forge  = { module="me.shedaniel.cloth:cloth-config-forge", version.ref="clothConfig" }
 
 caelus = { module="top.theillusivec4.caelus:caelus-forge", version.ref="caelus" }
+
+inline-fabric = { module="com.samsthenerd.inline:inline-fabric", version.ref="inline" }
+inline-forge  = { module="com.samsthenerd.inline:inline-forge", version.ref="inline" }
 
 asm          = { module="org.ow2.asm:asm", version.ref="asm" }
 asm-analysis = { module="org.ow2.asm:asm-analysis", version.ref="asm" }

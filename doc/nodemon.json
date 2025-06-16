@@ -3,7 +3,7 @@
         "doc/src",
         "doc/resources",
         "doc/hexdoc.toml",
-        "common/src/main/resources/assets/*/lang"
+        "*/src/*/resources"
     ],
     "ignore": ["**/generated/**"],
     "ext": "jinja,html,css,js,ts,toml,json,json5,py",

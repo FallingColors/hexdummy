@@ -14,9 +14,14 @@ val mavenGroup: String by project
 val modVersion: String by project
 val javaVersion = libs.versions.java.get().toInt()
 val minecraftVersion = libs.versions.minecraft.get()
+val release = System.getenv("RELEASE") == "true"
 
 group = mavenGroup
+
 version = "$modVersion+$minecraftVersion"
+if (!release) {
+    version = "$version-SNAPSHOT"
+}
 
 repositories {
     mavenCentral()

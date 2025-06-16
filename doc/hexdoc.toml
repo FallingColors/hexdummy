@@ -1,16 +1,14 @@
 modid = "hexdummy"
-book = "hexdummy:hexdummybook"
-default_lang = "en_us"
-default_branch = "main"
+book = "hexcasting:thehexbook"
 
 resource_dirs = [  # top takes priority
     "resources",
-    "{_common.src}/main/resources",
-    { path="{^_common.src}/generated/resources", required=false },
-    "{_fabric.src}/main/resources",
-    { path="{^_fabric.src}/generated/resources", required=false },
-    "{_forge.src}/main/resources",
-    { path="{^_forge.src}/generated/resources", required=false },
+    "{$_common.src}/main/resources",
+    { path="{$_common.src}/generated/resources", required=false },
+    "{$_fabric.src}/main/resources",
+    { path="{$_fabric.src}/generated/resources", required=false },
+    "{$_forge.src}/main/resources",
+    { path="{$_forge.src}/generated/resources", required=false },
     { modid="hexcasting" },
     { modid="minecraft" },
     { modid="hexdoc" },
@@ -18,7 +16,7 @@ resource_dirs = [  # top takes priority
 export_dir = "src/hexdoc_hexdummy/_export/generated"
 
 [template]
-icon = "icon.png"
+icon = "{$_common.src}/main/resources/assets/hexdummy/icon.png"
 include = [
     "hexdummy",
     "hexcasting",
@@ -27,17 +25,16 @@ include = [
 
 [template.args]
 mod_name = "Hex Dummy"
-author = "artynova"
+author = "FallingColors"
 show_landing_text = false
 
 [extra.hexcasting]
-# regexes for parsing pattern registry files - try running copier update and picking a different regex if your patterns aren't loading
 # NOTE: "!Raw" means "don't apply variable interpolation to this value"
-_pattern_regex = { "!Raw"='make\(\s*"(?P<name>[a-zA-Z0-9_\/]+)",\s*(?:new )?(?:ActionRegistryEntry|OperationAction)\(\s*HexPattern\.fromAngles\(\s*"(?P<signature>[aqweds]+)",\s*HexDir.(?P<startdir>\w+)\)' }
-_per_world_value = "true"
+_pattern_regex = { "!Raw"='(?P<is_per_world>make|makePerWorld)\("(?P<name>[^"]+)",\s*HexDir\.(?P<startdir>\w+),\s*"(?P<signature>[qweasd]+)"' }
+_per_world_value = "makePerWorld"
 
 [[extra.hexcasting.pattern_stubs]]
-path = "{^^^_common.package}/registry/HexDummyPatterns.java"
+path = "{$_common.kotlin}/registry/HexDummyActions.kt"
 regex = "{^_pattern_regex}"
 per_world_value = "{^_per_world_value}"
 
@@ -45,12 +42,15 @@ per_world_value = "{^_per_world_value}"
 
 [_common]
 src = "../common/src"
-package = "{src}/main/java/io/github/artynova/hexdummy"
+java = "{src}/main/java/io/github/fallingcolors/hexdummy"
+kotlin = "{src}/main/kotlin/io/github/fallingcolors/hexdummy"
 
 [_fabric]
 src = "../fabric/src"
-package = "{src}/main/java/io/github/artynova/hexdummy/fabric"
+java = "{src}/main/java/io/github/fallingcolors/hexdummy/fabric"
+kotlin = "{src}/main/kotlin/io/github/fallingcolors/hexdummy/fabric"
 
 [_forge]
 src = "../forge/src"
-package = "{src}/main/java/io/github/artynova/hexdummy/forge"
+java = "{src}/main/java/io/github/fallingcolors/hexdummy/forge"
+kotlin = "{src}/main/kotlin/io/github/fallingcolors/hexdummy/forge"

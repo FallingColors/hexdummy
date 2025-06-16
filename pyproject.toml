@@ -1,7 +1,7 @@
 [build-system]
 requires = [
     "hatchling",
-    "hatch-gradle-version>=0.8.0",
+    "hatch-gradle-version>=0.9.8",
 ]
 build-backend = "hatchling.build"
 
@@ -9,18 +9,18 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hexdoc-hexdummy"
-description = "Python web book docgen and hexdoc plugin for Hex Dummy."
+description = "Hex Dummy addon for Hex Casting"
 readme = "doc/README.md"
 authors = [
-    { name="artynova" },
+    { name="FallingColors" },
 ]
 keywords = ["hexdoc"]
 requires-python = ">=3.11"
 dynamic = ["version", "dependencies", "optional-dependencies"]
 
 [project.urls]
-Homepage = "https://artynova.github.io/hexdummy"
-Source = "https://github.com/artynova/hexdummy"
+Homepage = "https://fallingcolors.github.io/hexdummy"
+Source = "https://github.com/FallingColors/hexdummy"
 
 # Gradle version/deps
 
@@ -29,15 +29,16 @@ scheme = "gradle"
 source = "gradle-properties"
 py-path = "doc/src/hexdoc_hexdummy/__version__.py"
 key = "modVersion"
+gradle-version-regex = { regex='^(.+?)(-.+)?$', repl='\1.{minecraftVersion}\2' }
 
-[tool.hatch.metadata.hooks.gradle-properties]
+[tool.hatch.metadata.hooks.version-catalog]
 dependencies = [
-    { package="hexdoc-hexcasting", op="~=", py-version="1.0.dev20", key="hexcastingVersion" },
+    { package="hexdoc-hexcasting", op="~=", py-version="1.0", key="hexcasting" },
 ]
 
-[tool.hatch.metadata.hooks.gradle-properties.optional-dependencies]
+[tool.hatch.metadata.hooks.version-catalog.optional-dependencies]
 dev = [
-    "ruff~=0.1.4",
+    "ruff~=0.11.13",
 ]
 
 # directory inclusion
