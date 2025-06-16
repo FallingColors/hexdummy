@@ -11,10 +11,8 @@ on:
     inputs:
       hexdoc_release:
         type: boolean
-        default: false
-      deploy_pages:
+      dry_run:
         type: boolean
-        default: false
   workflow_dispatch:
 
 permissions:
@@ -161,7 +159,7 @@ jobs:
       pages: read
     outputs:
       pages-url: {{ var("steps.build.outputs.pages-url") }}
-      deploy: {{ var("github.event_name != 'pull_request' && (contains(fromJson(env.HEXDOC_BRANCHES), github.ref_name) || inputs.deploy_pages)") }}
+      deploy: {{ var("github.event_name != 'pull_request' && contains(fromJson(env.HEXDOC_BRANCHES), github.ref_name) && !inputs.dry_run") }}
     steps:
       - uses: actions/checkout@v4
 

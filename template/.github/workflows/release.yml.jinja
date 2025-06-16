@@ -37,7 +37,7 @@ jobs:
       pages: read
     with:
       hexdoc_release: {{ var("inputs.publish_hexdoc") }}
-      deploy_pages: {{ var("inputs.publish_hexdoc && !inputs.dry_run") }}
+      dry_run: {{ var("inputs.dry_run") }}
 
   publish-mod:
     needs: build
