@@ -172,7 +172,7 @@ jobs:
         env:
           GITHUB_TOKEN: {{ var("secrets.GITHUB_TOKEN") }}
         with:
-          release: {{ var("inputs.hexdoc_release") == true }}
+          release: {{ var("inputs.hexdoc_release == true") }}
 
   {#+ TODO: if deployment is disabled, still merge the book to see if there will be a version conflict? -#}
   deploy-pages:
@@ -195,7 +195,7 @@ jobs:
       - name: Merge new hexdoc build into existing book
         uses: hexdoc-dev/actions/merge@v1
         with:
-          release: {{ var("inputs.hexdoc_release") == true }}
+          release: {{ var("inputs.hexdoc_release == true") }}
           site-url: {{ var("needs.build-hexdoc.outputs.pages-url") }}
 
       # if you want to add extra things to your website (eg. Javadoc/Dokka), add it to _site/dst/docs here
@@ -204,4 +204,4 @@ jobs:
         uses: hexdoc-dev/actions/deploy-pages@v1
         with:
           merge: false
-          release: {{ var("inputs.hexdoc_release") == true }}
+          release: {{ var("inputs.hexdoc_release == true") }}
