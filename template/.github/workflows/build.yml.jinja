@@ -96,14 +96,19 @@ jobs:
           distribution: temurin
           java-version: 17
 
+      - name: Create cache key
+        run: |
+          cat <<END_OF_FILE > dependencies.txt
+          {{ var("matrix.dependencies") }}
+          END_OF_FILE
+
       # https://github.com/actions/cache#skipping-steps-based-on-cache-hit
       - name: Cache dependencies
         id: cache
         uses: actions/cache@v4
         with:
           path: run/mods
-          key: >-
-            {{ var("matrix.dependencies") }}
+          key: {{ var("hashFiles('dependencies.txt')") }}
 
       - name: Download dependencies
         if: steps.cache.outputs.cache-hit != 'true'
