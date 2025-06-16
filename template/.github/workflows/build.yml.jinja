@@ -12,6 +12,9 @@ on:
       hexdoc_release:
         type: boolean
         default: false
+      deploy_pages:
+        type: boolean
+        default: false
   workflow_dispatch:
 
 permissions:
@@ -158,7 +161,7 @@ jobs:
       pages: read
     outputs:
       pages-url: {{ var("steps.build.outputs.pages-url") }}
-      deploy: {{ var("github.event_name != 'pull_request' && (contains(fromJson(env.HEXDOC_BRANCHES), github.ref_name) || inputs.hexdoc_release)") }}
+      deploy: {{ var("github.event_name != 'pull_request' && (contains(fromJson(env.HEXDOC_BRANCHES), github.ref_name) || inputs.deploy_pages)") }}
     steps:
       - uses: actions/checkout@v4
 
@@ -173,6 +176,7 @@ jobs:
         with:
           release: {{ var("inputs.hexdoc_release") == true }}
 
+  {#+ TODO: if deployment is disabled, still merge the book to see if there will be a version conflict? -#}
   deploy-pages:
     needs:
       - build-hexdoc
