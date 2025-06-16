@@ -36,6 +36,7 @@ jobs:
       contents: write
       pages: read
     with:
+      mod_release: {{ var("inputs.publish_curseforge || inputs.publish_modrinth || inputs.publish_github") }}
       hexdoc_release: {{ var("inputs.publish_hexdoc") }}
       dry_run: {{ var("inputs.dry_run") }}
 

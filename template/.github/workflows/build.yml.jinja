@@ -11,10 +11,13 @@ on:
     inputs:
       mod_release:
         type: boolean
+        required: true
       hexdoc_release:
         type: boolean
+        required: true
       dry_run:
         type: boolean
+        required: true
   workflow_dispatch:
 
 permissions:

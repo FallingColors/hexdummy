@@ -33,3 +33,4 @@ The following repository contains an example of a project generated using HexDum
 - Improve documentation.
 - Investigate https://github.com/headlesshq/mc-server-test more. From the logs, it seems like the Fabric server test might not actually be loading any mods?
 - Fix the CI tests in this repository.
+- Figure out how to publish to CurseForge/Modrinth/GitHub without having to build the mod again.
