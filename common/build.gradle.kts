@@ -8,6 +8,7 @@ architectury {
 
 dependencies {
     implementation(libs.kotlin.stdlib)
+    implementation(kotlin("reflect"))
 
     // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
     // Do NOT use other classes from fabric loader
