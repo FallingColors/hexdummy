@@ -1,8 +1,8 @@
-package {{ package }}.networking.handler
+package {{ kotlin_package }}.networking.handler
 
 import dev.architectury.networking.NetworkManager.PacketContext
-import {{ package }}.config.{{ classname }}Config
-import {{ package }}.networking.msg.*
+import {{ kotlin_package }}.config.{{ classname }}Config
+import {{ kotlin_package }}.networking.msg.*
 
 fun {{ classname }}MessageS2C.applyOnClient(ctx: PacketContext) = ctx.queue {
     when (this) {

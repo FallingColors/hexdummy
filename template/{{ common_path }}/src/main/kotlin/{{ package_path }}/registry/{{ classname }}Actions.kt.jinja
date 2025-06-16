@@ -1,4 +1,4 @@
-package {{ package }}.registry
+package {{ kotlin_package }}.registry
 
 import at.petrak.hexcasting.api.casting.ActionRegistryEntry
 import at.petrak.hexcasting.api.casting.castables.Action
@@ -6,7 +6,7 @@ import at.petrak.hexcasting.api.casting.math.HexDir
 import at.petrak.hexcasting.api.casting.math.HexPattern
 import at.petrak.hexcasting.common.lib.HexRegistries
 import at.petrak.hexcasting.common.lib.hex.HexActions
-import {{ package }}.casting.actions.spells.OpCongratulate
+import {{ kotlin_package }}.casting.actions.spells.OpCongratulate
 
 object {{ classname }}Actions : {{ classname }}Registrar<ActionRegistryEntry>(
     HexRegistries.ACTION,

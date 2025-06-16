@@ -1,8 +1,8 @@
 @file:JvmName("{{ classname }}AbstractionsImpl")
 
-package {{ package }}.fabric
+package {{ kotlin_package }}.fabric
 
-import {{ package }}.registry.{{ classname }}Registrar
+import {{ kotlin_package }}.registry.{{ classname }}Registrar
 import net.minecraft.core.Registry
 
 fun <T : Any> initRegistry(registrar: {{ classname }}Registrar<T>) {

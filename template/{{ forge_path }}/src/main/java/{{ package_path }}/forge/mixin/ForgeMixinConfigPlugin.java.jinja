@@ -1,6 +1,6 @@
-package {{ package }}.forge.mixin;
+package {{ java_package }}.forge.mixin;
 
-import {{ package }}.{{ classname }};
+import {{ java_package }}.{{ classname }};
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
@@ -12,7 +12,7 @@ import java.util.Set;
 public class ForgeMixinConfigPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.equals("{{ package }}.forge.mixin.MixinDatagenMain")) {
+        if (mixinClassName.equals("{{ java_package }}.forge.mixin.MixinDatagenMain")) {
             var shouldApply = System.getProperty("{{ modid }}.apply-datagen-mixin", "false").equals("true");
             if (shouldApply) {
                 {{ classname }}.LOGGER.warn("Applying scuffed datagen mixin. This should not happen if not running datagen!");

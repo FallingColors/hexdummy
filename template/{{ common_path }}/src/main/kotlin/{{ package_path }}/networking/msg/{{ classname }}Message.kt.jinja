@@ -1,11 +1,11 @@
-package {{ package }}.networking.msg
+package {{ kotlin_package }}.networking.msg
 
 import dev.architectury.networking.NetworkChannel
 import dev.architectury.networking.NetworkManager.PacketContext
-import {{ package }}.{{ classname }}
-import {{ package }}.networking.{{ classname }}Networking
-import {{ package }}.networking.handler.applyOnClient
-import {{ package }}.networking.handler.applyOnServer
+import {{ kotlin_package }}.{{ classname }}
+import {{ kotlin_package }}.networking.{{ classname }}Networking
+import {{ kotlin_package }}.networking.handler.applyOnClient
+import {{ kotlin_package }}.networking.handler.applyOnServer
 import net.fabricmc.api.EnvType
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.server.level.ServerPlayer

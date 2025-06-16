@@ -1,4 +1,4 @@
-package {{ package }}.config
+package {{ kotlin_package }}.config
 
 import dev.architectury.event.events.client.ClientPlayerEvent
 import dev.architectury.event.events.common.PlayerEvent
@@ -13,8 +13,8 @@ import me.shedaniel.autoconfig.serializer.PartitioningSerializer
 import me.shedaniel.autoconfig.serializer.PartitioningSerializer.GlobalData
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer
 import net.minecraft.network.FriendlyByteBuf
-import {{ package }}.{{ classname }}
-import {{ package }}.networking.msg.MsgSyncConfigS2C
+import {{ kotlin_package }}.{{ classname }}
+import {{ kotlin_package }}.networking.msg.MsgSyncConfigS2C
 
 object {{ classname }}Config {
     @JvmStatic

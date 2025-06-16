@@ -1,5 +1,11 @@
 # Changelog
 
+## `2.0.2` - 2025-06-16
+
+### Additions
+
+- Added a `kotlin_package` advanced option, to allow escaping Kotlin keywords in otherwise valid Java package names (eg. `gay.object.hexdebug` -> ```gay.`object`.hexdebug```)
+
 ## `2.0.1` - 2025-06-16
 
 ### Fixes

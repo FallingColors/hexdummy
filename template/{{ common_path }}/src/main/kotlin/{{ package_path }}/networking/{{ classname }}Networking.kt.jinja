@@ -1,8 +1,8 @@
-package {{ package }}.networking
+package {{ kotlin_package }}.networking
 
 import dev.architectury.networking.NetworkChannel
-import {{ package }}.{{ classname }}
-import {{ package }}.networking.msg.{{ classname }}MessageCompanion
+import {{ kotlin_package }}.{{ classname }}
+import {{ kotlin_package }}.networking.msg.{{ classname }}MessageCompanion
 
 object {{ classname }}Networking {
     val CHANNEL: NetworkChannel = NetworkChannel.create({{ classname }}.id("networking_channel"))

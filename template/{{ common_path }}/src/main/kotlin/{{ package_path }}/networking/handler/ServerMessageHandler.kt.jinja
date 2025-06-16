@@ -1,7 +1,7 @@
-package {{ package }}.networking.handler
+package {{ kotlin_package }}.networking.handler
 
 import dev.architectury.networking.NetworkManager.PacketContext
-import {{ package }}.networking.msg.*
+import {{ kotlin_package }}.networking.msg.*
 
 fun {{ classname }}MessageC2S.applyOnServer(ctx: PacketContext) = ctx.queue {
     // NOTE: this is commented out because otherwise it fails to compile if there's nothing inside of the when expression

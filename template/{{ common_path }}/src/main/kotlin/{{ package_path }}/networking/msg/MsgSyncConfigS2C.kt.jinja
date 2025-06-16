@@ -1,6 +1,6 @@
-package {{ package }}.networking.msg
+package {{ kotlin_package }}.networking.msg
 
-import {{ package }}.config.{{ classname }}Config
+import {{ kotlin_package }}.config.{{ classname }}Config
 import net.minecraft.network.FriendlyByteBuf
 
 data class MsgSyncConfigS2C(val serverConfig: {{ classname }}Config.ServerConfig) : {{ classname }}MessageS2C {

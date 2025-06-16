@@ -1,9 +1,9 @@
 @file:JvmName("{{ classname }}Abstractions")
 
-package {{ package }}
+package {{ kotlin_package }}
 
 import dev.architectury.injectables.annotations.ExpectPlatform
-import {{ package }}.registry.{{ classname }}Registrar
+import {{ kotlin_package }}.registry.{{ classname }}Registrar
 
 fun initRegistries(vararg registries: {{ classname }}Registrar<*>) {
     for (registry in registries) {

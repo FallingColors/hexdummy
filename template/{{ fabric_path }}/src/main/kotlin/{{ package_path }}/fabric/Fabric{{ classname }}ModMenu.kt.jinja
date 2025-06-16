@@ -1,8 +1,8 @@
-package {{ package }}.fabric
+package {{ kotlin_package }}.fabric
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory
 import com.terraformersmc.modmenu.api.ModMenuApi
-import {{ package }}.{{ classname }}Client
+import {{ kotlin_package }}.{{ classname }}Client
 
 object Fabric{{ classname }}ModMenu : ModMenuApi {
     override fun getModConfigScreenFactory() = ConfigScreenFactory({{ classname }}Client::getConfigScreen)
