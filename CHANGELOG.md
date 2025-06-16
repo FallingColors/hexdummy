@@ -6,6 +6,10 @@
 
 - Added a `kotlin_package` advanced option, to allow escaping Kotlin keywords in otherwise valid Java package names (eg. `gay.object.hexdebug` -> ```gay.`object`.hexdebug```)
 
+### Notes
+
+- When updating to this version, you'll be prompted for the base Java package name again, even with `--skip-answered`, since the underlying option was renamed from `package` to `java_package`. If you don't remember what you answered last time, you can find the old value in `.copier-answers.yml`, eg. `package: foo.bar.baz`.
+
 ## `2.0.1` - 2025-06-16
 
 ### Fixes
