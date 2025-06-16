@@ -102,7 +102,7 @@ jobs:
 
       - name: Download dependencies
         run: |
-          for url in "{{ "${" + var("matrix.dependencies") + "}" }}"; do
+          for url in {{ var("matrix.dependencies") }}; do
             wget --directory-prefix=run/mods/ "$url"
           done
 
