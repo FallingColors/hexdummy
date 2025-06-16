@@ -6,16 +6,16 @@
 
 - Added support for Kotlin (and rewrote everything in Kotlin).
 - Added GitHub Actions workflows for building and testing the mod on every push and pull request, deploying the hexdoc book, and releasing new versions of the mod to CurseForge and Modrinth using the GitHub UI.
-- Added an option to
+- Added an option to include the Minecraft version in the mod version (eg. `v1.0.0+1.20.1`).
+- Integrated hexdoc directly into the template, instead of requiring users to set up `hexdoc-hexcasting-template` separately.
 
 ### Changes
 
 - Updated to Hex Casting 0.11.2.
 - Completely rewrote the entire template from the ground up.
-- Converted all Gradle build scripts to Kotlin.
+- Converted all Gradle build scripts and most of the code to Kotlin.
 - Moved common Gradle configs from `allprojects`/`subprojects` to convention plugins in `buildSrc`.
 - Moved dependency versions from `gradle.properties` to `gradle/libs.versions.toml`.
-- Integrated hexdoc directly into the template, instead of requiring users to set up `hexdoc-hexcasting-template` separately.
 
 ### Notes
 
