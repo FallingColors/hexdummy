@@ -57,6 +57,7 @@ jobs:
   test-mod:
     needs: build-mod
     strategy:
+      fail-fast: true
       matrix:
         env:
           - server
@@ -68,9 +69,19 @@ jobs:
           - modloader: fabric
             mc-runtime-test: fabric
             fabric-api: 0.85.0
+            # NOTE: these must be quoted and formatted exactly like this, since they'll be converted into a bash array
+            dependencies: >-
+              'https://cdn.modrinth.com/data/Ha28R6CL/versions/vlhvI5Li/fabric-language-kotlin-1.10.18%2Bkotlin.1.9.22.jar'
+              'https://cdn.modrinth.com/data/lhGA9TYQ/versions/WbL7MStR/architectury-9.2.14-fabric.jar'
+              'https://cdn.modrinth.com/data/9s6osm5g/versions/s7VTKfLA/cloth-config-11.1.106-fabric.jar'
+              'https://cdn.modrinth.com/data/nTW3yKrm/versions/IvI9LKNc/hexcasting-fabric-1.20.1-0.11.2.jar'
           - modloader: forge
             fabric-api: none
             mc-runtime-test: lexforge
+            dependencies: >-
+              'https://cdn.modrinth.com/data/lhGA9TYQ/versions/1MKTLiiG/architectury-9.2.14-forge.jar'
+              'https://cdn.modrinth.com/data/9s6osm5g/versions/JoLgnJ0G/cloth-config-11.1.106-forge.jar'
+              'https://cdn.modrinth.com/data/nTW3yKrm/versions/xENnFQpR/hexcasting-forge-1.20.1-0.11.2.jar'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-java@v4
@@ -88,7 +99,13 @@ jobs:
         run: |
           mkdir -p run/mods
           cp build/ciArtifacts/*{{ var("matrix.modloader") }}*.jar run/mods
-      
+
+      - name: Download dependencies
+        run: |
+          for url in "{{ "${" + var("matrix.dependencies") + "}" }}"; do
+            wget --directory-prefix=run/mods/ "$url"
+          done
+
       - name: Run MC test client
         if: matrix.env == 'client'
         uses: headlesshq/mc-runtime-test@3.1.1
