@@ -14,3 +14,9 @@ This branch contains the heavily work-in-progress HexDummy rewrite.
 4. Follow the [hexdoc setup instructions](https://hexdoc.hexxy.media/docs/guides/deployment/github-pages) for GitHub Pages.
 
 Further instructions TODO - look at [HexDebug](https://github.com/object-Object/HexDebug) or [IoticBlocks](https://github.com/object-Object/IoticBlocks) for examples, since this template is based heavily on those mods.
+
+## TODO
+
+- Finish adding Yarn support.
+- See if there's a better way to download dependencies for CI tests than just manually listing Modrinth URLs.
+- Improve documentation.
