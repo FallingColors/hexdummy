@@ -1,10 +1,27 @@
 # Changelog
 
-## 2.0.0
+## `2.0.0` - 2025-06-16
 
-Completely rewrote the template from the ground up!
+### Additions
 
-## 0.0.2
+- Added support for Kotlin (and rewrote everything in Kotlin).
+- Added GitHub Actions workflows for building and testing the mod on every push and pull request, deploying the hexdoc book, and releasing new versions of the mod to CurseForge and Modrinth using the GitHub UI.
+- Added an option to
+
+### Changes
+
+- Updated to Hex Casting 0.11.2.
+- Completely rewrote the entire template from the ground up.
+- Converted all Gradle build scripts to Kotlin.
+- Moved common Gradle configs from `allprojects`/`subprojects` to convention plugins in `buildSrc`.
+- Moved dependency versions from `gradle.properties` to `gradle/libs.versions.toml`.
+- Integrated hexdoc directly into the template, instead of requiring users to set up `hexdoc-hexcasting-template` separately.
+
+### Notes
+
+- Most of the non-Gradle files do not yet have Yarn support. As such, **Mojmap is highly recommended** for the time being, unless you know what you're doing and are fine with manually converting the code to Yarn.
+
+## `0.0.2` - 2023-08-26
 
 ### Changes
 
@@ -14,7 +31,7 @@ Completely rewrote the template from the ground up!
 
 - Docgen being broken.
 
-## 0.0.1
+## `0.0.1` - 2023-08-26
 
 ### Additions
 
