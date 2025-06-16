@@ -5,6 +5,7 @@ modid = "hexdummy"
 github_user = "FallingColors"
 classname = "HexDummy"
 display_name = "Hex Dummy"
+mod_version = "0.1.0"
 
 [output.".ctt/mojmap"]
 mappings_name = "Mojmap"

@@ -48,20 +48,20 @@ mappings_name:
     - Yarn
   default: Mojmap
 
+mod_version:
+  type: str
+  help: Initial mod version
+  default: "0.1.0"
+
 minecraft_version_in_mod_version:
   type: bool
-  help: Include Minecraft version in mod version? (eg. v1.0.0+1.20.1)
+  help: Include Minecraft version in mod version? (eg. v{{ mod_version }}+1.20.1)
   default: true
 
 advanced:
   type: bool
   help: Show advanced options?
   default: false
-
-mod_version:
-  when: "{{ advanced }}"
-  type: str
-  default: "0.1.0"
 
 classname:
   when: "{{ advanced }}"
