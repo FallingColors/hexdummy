@@ -4,9 +4,9 @@ license = "MIT"
 
 [[mods]]
 modId = "{{ modid }}"
-version = "${modVersion}"
+version = "${version}"
 displayName = "{{ display_name }}"
-logoFile = "icon.png"
+logoFile = "assets/{{ modid }}/icon.png"
 authors = "{{ github_user }}"
 description = "{{ description }}"
 
@@ -41,6 +41,6 @@ side = "BOTH"
 [[dependencies.{{ modid }}]]
 modId = "hexcasting"
 mandatory = true
-versionRange = "[${versions.hexcasting},)"
+versionRange = "[${versions.hexcasting_dependency},)"
 ordering = "NONE"
 side = "BOTH"

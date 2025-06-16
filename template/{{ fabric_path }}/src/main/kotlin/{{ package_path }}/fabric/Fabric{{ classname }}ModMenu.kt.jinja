@@ -1,0 +1,9 @@
+package {{ package }}.fabric
+
+import com.terraformersmc.modmenu.api.ConfigScreenFactory
+import com.terraformersmc.modmenu.api.ModMenuApi
+import {{ package }}.{{ classname }}Client
+
+object Fabric{{ classname }}ModMenu : ModMenuApi {
+    override fun getModConfigScreenFactory() = ConfigScreenFactory({{ classname }}Client::getConfigScreen)
+}

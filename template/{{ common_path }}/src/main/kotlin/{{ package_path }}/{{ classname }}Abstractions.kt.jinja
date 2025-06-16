@@ -1,0 +1,17 @@
+@file:JvmName("{{ classname }}Abstractions")
+
+package {{ package }}
+
+import dev.architectury.injectables.annotations.ExpectPlatform
+import {{ package }}.registry.{{ classname }}Registrar
+
+fun initRegistries(vararg registries: {{ classname }}Registrar<*>) {
+    for (registry in registries) {
+        initRegistry(registry)
+    }
+}
+
+@ExpectPlatform
+fun <T : Any> initRegistry(registrar: {{ classname }}Registrar<T>) {
+    throw AssertionError()
+}

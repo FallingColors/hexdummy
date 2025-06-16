@@ -13,10 +13,21 @@ plugins {
 val mavenGroup: String by project
 val modVersion: String by project
 val javaVersion = libs.versions.java.get().toInt()
+{% if minecraft_version_in_mod_version %}
 val minecraftVersion = libs.versions.minecraft.get()
+{% endif %}
+val release = System.getenv("RELEASE") == "true"
 
 group = mavenGroup
+
+{% if minecraft_version_in_mod_version %}
 version = "$modVersion+$minecraftVersion"
+{% else %}
+version = modVersion
+{% endif %}
+if (!release) {
+    version = "$version-SNAPSHOT"
+}
 
 repositories {
     mavenCentral()

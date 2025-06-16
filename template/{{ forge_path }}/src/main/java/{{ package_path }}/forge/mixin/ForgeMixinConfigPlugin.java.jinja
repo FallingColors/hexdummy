@@ -15,7 +15,7 @@ public class ForgeMixinConfigPlugin implements IMixinConfigPlugin {
         if (mixinClassName.equals("{{ package }}.forge.mixin.MixinDatagenMain")) {
             var shouldApply = System.getProperty("{{ modid }}.apply-datagen-mixin", "false").equals("true");
             if (shouldApply) {
-                {{ classname }}.LOGGER.error("Applying scuffed datagen mixin. This should not happen if not running datagen!");
+                {{ classname }}.LOGGER.warn("Applying scuffed datagen mixin. This should not happen if not running datagen!");
             }
             return shouldApply;
         }

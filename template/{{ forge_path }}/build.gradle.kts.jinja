@@ -13,7 +13,10 @@ loom {
         convertAccessWideners = true
         extraAccessWideners.add(loom.accessWidenerPath.get().asFile.name)
 
-        mixinConfig("{{ modid }}-common.mixins.json", "{{ modid }}.mixins.json")
+        mixinConfig(
+            "{{ modid }}-common.mixins.json",
+            "{{ modid }}-forge.mixins.json",
+        )
     }
 
     runs {
@@ -32,7 +35,7 @@ loom {
     }
 }
 
-{{ modid }}ModDependencies {
+{{ classname|lower }}ModDependencies {
     // expand versions in mods.toml
     filesMatching.add("META-INF/mods.toml")
 
@@ -63,11 +66,17 @@ dependencies {
     modImplementation(libs.paucal.forge)
     modLocalRuntime(libs.patchouli.forge)
     modLocalRuntime(libs.caelus)
+    modLocalRuntime(libs.inline.forge) { isTransitive = false }
 
     modApi(libs.clothConfig.forge)
 
-    libs.mixinExtras.also {
-        implementation(it)
+    libs.mixinExtras.common.also {
+        compileOnly(it)
+        annotationProcessor(it)
+    }
+
+    libs.mixinExtras.forge.also {
+        localRuntime(it)
         include(it)
     }
 }

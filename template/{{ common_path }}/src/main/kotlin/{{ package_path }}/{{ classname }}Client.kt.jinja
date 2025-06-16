@@ -1,0 +1,16 @@
+package {{ package }}
+
+import {{ package }}.config.{{ classname }}Config
+import {{ package }}.config.{{ classname }}Config.GlobalConfig
+import me.shedaniel.autoconfig.AutoConfig
+import net.minecraft.client.gui.screens.Screen
+
+object {{ classname }}Client {
+    fun init() {
+        {{ classname }}Config.initClient()
+    }
+
+    fun getConfigScreen(parent: Screen): Screen {
+        return AutoConfig.getConfigScreen(GlobalConfig::class.java, parent).get()
+    }
+}

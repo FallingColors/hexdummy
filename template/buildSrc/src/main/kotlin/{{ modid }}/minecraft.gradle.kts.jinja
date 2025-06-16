@@ -2,6 +2,8 @@
 
 // A convention plugin that should be applied to all Minecraft-related subprojects, including {{ common_path }}.
 
+@file:Suppress("UnstableApiUsage")
+
 package {{ modid }}
 
 import kotlin.io.path.div
@@ -23,6 +25,13 @@ base.archivesName = "${modId}-$platform"
 loom {
     silentMojangMappingsLicense()
     accessWidenerPath = project(":{{ common_path }}").file("src/main/resources/{{ modid }}.accesswidener")
+
+    mixin {
+        // the default name includes both archivesName and the subproject, resulting in the platform showing up twice
+        // default: {{ modid }}-common-{{ common_path }}-refmap.json
+        // fixed:   {{ modid }}-common.refmap.json
+        defaultRefmapName = "${base.archivesName.get()}.refmap.json"
+    }
 }
 
 pkJson5 {
@@ -53,16 +62,5 @@ sourceSets {
         resources {
             srcDir(file("src/generated/resources"))
         }
-    }
-}
-
-tasks {
-    val artifactsTask = register<Copy>("githubArtifacts") {
-        from(remapJar, remapSourcesJar, get("javadocJar"))
-        into(rootDir.toPath() / "build" / "githubArtifacts")
-    }
-
-    build {
-        dependsOn(artifactsTask)
     }
 }

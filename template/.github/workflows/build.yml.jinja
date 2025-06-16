@@ -1,49 +1,44 @@
-{% raw %}
-name: Build
+{% from "macros/github.jinja" import actions_var as var -%}
+
+name: Build and test
 
 on:
   push:
-    branches: "*"
+    branches:
+      - '*'
   pull_request:
+  workflow_call:
+    inputs:
+      hexdoc_release:
+        type: boolean
+        default: false
   workflow_dispatch:
 
 permissions:
   contents: read
 
 env:
-  BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
-  # add more branches here to enable deploying the web book to Pages from those branches
-  # eg. '["{% endraw %}{{ default_branch }}{% raw %}", "1.19"]'
-  MAIN_BRANCHES: '["{% endraw %}{{ default_branch }}{% raw %}"]'
+  # adding a branch name here will make hexdoc deploy prerelease versions of your web book on every push to that branch
+  # for example: https://hexcasting.hexxy.media/v/latest/main/en_us/
+  HEXDOC_BRANCHES: '["{{ default_branch }}"]'
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      is-main-branch: |-
-        ${{
-          github.event_name != 'pull_request'
-          && contains(fromJson(env.MAIN_BRANCHES), env.BRANCH_NAME)
-        }}
-    steps:
-      - name: Print message so the workflow isn't invalid
-        run: 'echo "Hello World!"'
-
   build-mod:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: {% endraw %}{{ java_version }}{% raw %}
+          java-version: 17
+
       - uses: gradle/actions/setup-gradle@v3
 
       - name: Build mod
         run: ./gradlew build
 
-      # literally no idea why the mkdir is needed, but the workflow fails without it :/
+      # if this step fails, you need to run your datagen and commit the updated files
       - name: Check if datagen needs to be run
         timeout-minutes: 3
         run: |
@@ -52,23 +47,117 @@ jobs:
           git add --intent-to-add .
           git diff --name-only --exit-code -- ":!:*/src/generated/resources/.cache/*"
 
-      - name: Upload prerelease artifact
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: mod-prerelease
-          path: build/githubArtifacts/
+          name: mod-build
+          path: build/ciArtifacts/
           if-no-files-found: error
 
-  build-docs:
-    needs: setup
-    uses: hexdoc-dev/actions/.github/workflows/hexdoc.yml@v1
+  test-mod:
+    needs: build-mod
+    strategy:
+      matrix:
+        env:
+          - server
+          - client
+        modloader:
+          - fabric
+          - forge
+        include:
+          - modloader: fabric
+            mc-runtime-test: fabric
+            fabric-api: 0.85.0
+          - modloader: forge
+            fabric-api: none
+            mc-runtime-test: lexforge
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: mod-build
+          path: build/ciArtifacts/
+      
+      - name: Set up mods folder
+        run: |
+          mkdir -p run/mods
+          cp build/ciArtifacts/*{{ var("matrix.modloader") }}*.jar run/mods
+      
+      - name: Run MC test client
+        if: matrix.env == 'client'
+        uses: headlesshq/mc-runtime-test@3.1.1
+        with:
+          java: 17
+          mc: 1.20.1
+          modloader: {{ var("matrix.modloader") }}
+          regex: '.*{{ var("matrix.modloader") }}.*'
+          fabric-api: {{ var("matrix.fabric-api") }}
+          mc-runtime-test: {{ var("matrix.mc-runtime-test") }}
+      
+      - name: Run MC test server
+        if: matrix.env == 'server'
+        uses: headlesshq/mc-server-test@1.0.0
+        with:
+          java: 17
+          mc: 1.20.1
+          modloader: {{ var("matrix.modloader") }}
+          fabric-api: {{ var("matrix.fabric-api") }}
+
+  build-hexdoc:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      pages-url: {{ var("steps.build.outputs.pages-url") }}
+      deploy: {{ var("github.event_name != 'pull_request' && (contains(fromJson(env.HEXDOC_BRANCHES), github.ref_name) || inputs.hexdoc_release)") }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hexdoc-dev/actions/setup@v1
+        with:
+          python-version: 3.11
+
+      - id: build
+        uses: hexdoc-dev/actions/build@v1
+        env:
+          GITHUB_TOKEN: {{ var("secrets.GITHUB_TOKEN") }}
+        with:
+          release: {{ var("inputs.hexdoc_release") }}
+
+  deploy-pages:
+    needs:
+      - build-hexdoc
+    if: needs.build-hexdoc.outputs.deploy == 'true'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: hexdoc-deploy-pages
+      cancel-in-progress: false
     permissions:
       contents: write
-      pages: read
-    secrets:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    with:
-      python-version: 3.11
-      deploy-pages: ${{ needs.setup.outputs.is-main-branch == 'true' }}
-      release: false
-{% endraw %}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hexdoc-dev/actions/setup@v1
+        with:
+          python-version: 3.11
+        
+      - name: Merge new hexdoc build into existing book
+        uses: hexdoc-dev/actions/merge@v1
+        with:
+          release: {{ var("inputs.hexdoc_release") }}
+          site-url: {{ var("needs.build-hexdoc.outputs.pages-url") }}
+
+      # if you want to add extra things to your website (eg. Javadoc/Dokka), add it to _site/dst/docs here
+
+      - name: Deploy to Pages
+        uses: hexdoc-dev/actions/deploy-pages@v1
+        with:
+          merge: false
+          release: {{ var("inputs.hexdoc_release") }}

@@ -52,7 +52,7 @@ def ctt(session: nox.Session):
     for git_dir in CTT_DIR.glob("*/.git"):
         try_rmtree(session, git_dir)
 
-    session.run("ctt", silent=not is_ci())
+    session.run("python", "ctt_strict.py", silent=not is_ci())
 
 
 @nox.session(tags=["setup"])
@@ -75,19 +75,6 @@ def setup(session: nox.Session, output_dir: Path):
         "-m",
         "Initial commit",
         external=True,
-    )
-
-    session.run(
-        "copier",
-        "copy",
-        "gh:hexdoc-dev/hexdoc-hexcasting-template",
-        ".",
-        "--answers-file",
-        ".hexdoc-template-inputs.yml",
-        "--skip",
-        ".gitignore",
-        "--defaults",
-        "--overwrite",
     )
 
 

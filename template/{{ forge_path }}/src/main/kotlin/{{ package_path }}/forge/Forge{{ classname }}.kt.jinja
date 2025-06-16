@@ -2,8 +2,6 @@ package {{ package }}.forge
 
 import dev.architectury.platform.forge.EventBuses
 import {{ package }}.{{ classname }}
-import {{ package }}.forge.datagen.{{ classname }}Models
-import {{ package }}.forge.datagen.{{ classname }}Recipes
 import net.minecraft.data.DataProvider
 import net.minecraft.data.DataProvider.Factory
 import net.minecraft.data.PackOutput
@@ -11,10 +9,6 @@ import net.minecraftforge.data.event.GatherDataEvent
 import net.minecraftforge.fml.common.Mod
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 
-/**
- * This is your loading entrypoint on forge, in case you need to initialize
- * something platform-specific.
- */
 @Mod({{ classname }}.MODID)
 class {{ classname }}Forge {
     init {
@@ -28,9 +22,7 @@ class {{ classname }}Forge {
 
     private fun gatherData(event: GatherDataEvent) {
         event.apply {
-            val efh = existingFileHelper
-            addProvider(includeClient()) { {{ classname }}Models(it, efh) }
-            addProvider(includeServer()) { {{ classname }}Recipes(it) }
+            // TODO: add datagen providers here
         }
     }
 }

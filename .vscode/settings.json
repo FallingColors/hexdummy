@@ -25,6 +25,7 @@
         "*.mcmeta.jinja": "jinja-json",
         "*.properties.jinja": "jinja-properties",
         "*_copier_conf.answers_file*.jinja": "jinja-yaml",
+        "*.json5.jinja": "jinja-json",
     },
     "git.ignoredRepositories": [
         ".ctt/*",

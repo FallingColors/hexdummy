@@ -1,0 +1,10 @@
+package {{ package }}.networking.handler
+
+import dev.architectury.networking.NetworkManager.PacketContext
+import {{ package }}.networking.msg.*
+
+fun {{ classname }}MessageC2S.applyOnServer(ctx: PacketContext) = ctx.queue {
+    when (this) {
+        // add server-side message handlers here
+    }
+}

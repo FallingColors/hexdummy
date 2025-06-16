@@ -1,52 +1,43 @@
-{% raw %}
+{% from "macros/github.jinja" import actions_var as var -%}
+
 name: Release
 
 on:
   workflow_dispatch:
     inputs:
-      publish-curseforge:
-        description: Publish to CurseForge
-        type: boolean
-        default: false
-      publish-modrinth:
-        description: Publish to Modrinth
-        type: boolean
-        default: false
-      publish-github:
+      publish_github:
         description: Publish to GitHub
         type: boolean
-        default: false
-      publish-docs:
-        description: Publish the web book
+        default: true
+      publish_curseforge:
+        description: Publish to CurseForge
         type: boolean
-        default: false
-      dry-run:
+        default: true
+      publish_modrinth:
+        description: Publish to Modrinth
+        type: boolean
+        default: true
+      publish_hexdoc:
+        description: Publish hexdoc book
+        type: boolean
+        default: true
+      dry_run:
         description: Perform a dry run
         type: boolean
         default: false
 
 env:
-  PYPI_PACKAGE: hexdoc-{% endraw %}{{ modid }}{% raw %}
-
-permissions:
-  contents: read
+  PYPI_PACKAGE: hexdoc-{{ modid }}
 
 jobs:
-  build-docs:
-    uses: hexdoc-dev/actions/.github/workflows/hexdoc.yml@v1
-    permissions:
-      contents: write
-      pages: read
-    secrets:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  build:
+    uses: ./.github/workflows/build.yml
     with:
-      python-version: 3.11
-      deploy-pages: ${{ inputs.publish-docs && !inputs.dry-run }}
-      release: true
+      hexdoc_release: {{ var("inputs.publish_hexdoc") }}
 
   publish-mod:
-    needs: build-docs
-    if: inputs.publish-curseforge || inputs.publish-modrinth || inputs.publish-github
+    needs: build
+    if: inputs.publish_curseforge || inputs.publish_modrinth || inputs.publish_github
     runs-on: ubuntu-latest
     environment:
       name: curseforge-modrinth
@@ -54,53 +45,60 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: {% endraw %}{{ java_version }}{% raw %}
+          java-version: 17
+
       - uses: gradle/actions/setup-gradle@v3
 
       - name: Build mod
+        env:
+          RELEASE: true
         run: ./gradlew build
 
       # do this first so we fail if we've already published this version
       # because CurseForge and Modrinth apparently don't care!
       - name: Publish to GitHub
-        if: inputs.publish-github
+        if: inputs.publish_github
         env:
-          DRY_RUN: ${{ inputs.dry-run && 'true' || '' }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE: true
+          DRY_RUN: {{ var("inputs.dry_run && 'true' || ''") }}
+          GITHUB_TOKEN: {{ var("secrets.GITHUB_TOKEN") }}
         run: ./gradlew publishGithub
 
       - name: Publish to CurseForge
-        if: inputs.publish-curseforge
+        if: inputs.publish_curseforge
         env:
-          DRY_RUN: ${{ inputs.dry-run && 'true' || '' }}
-          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          RELEASE: true
+          DRY_RUN: {{ var("inputs.dry_run && 'true' || ''") }}
+          CURSEFORGE_TOKEN: {{ var("secrets.CURSEFORGE_TOKEN") }}
         run: ./gradlew publishCurseforge
 
       - name: Publish to Modrinth
-        if: inputs.publish-modrinth
+        if: inputs.publish_modrinth
         env:
-          DRY_RUN: ${{ inputs.dry-run && 'true' || '' }}
-          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          RELEASE: true
+          DRY_RUN: {{ var("inputs.dry_run && 'true' || ''") }}
+          MODRINTH_TOKEN: {{ var("secrets.MODRINTH_TOKEN") }}
         run: ./gradlew publishModrinth
 
       - name: Upload dry run artifact
-        if: inputs.dry-run
+        if: inputs.dry_run
         uses: actions/upload-artifact@v4
         with:
-          name: mod-publish
+          name: dry-run
           path: '*/build/publishMods'
           if-no-files-found: error
 
-  publish-docs:
-    needs: build-docs
-    if: inputs.publish-docs && !inputs.dry-run
+  publish-pypi:
+    needs: build
+    if: inputs.publish_hexdoc && !inputs.dry_run
     runs-on: ubuntu-latest
     environment:
       name: pypi
-      url: https://pypi.org/p/${{ env.PYPI_PACKAGE }}
+      url: https://pypi.org/p/{{ var("env.PYPI_PACKAGE") }}
     permissions:
       id-token: write
     steps:
@@ -111,4 +109,3 @@ jobs:
 
       - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
-{% endraw %}

@@ -1,0 +1,15 @@
+package {{ package }}.networking
+
+import dev.architectury.networking.NetworkChannel
+import {{ package }}.{{ classname }}
+import {{ package }}.networking.msg.{{ classname }}MessageCompanion
+
+object {{ classname }}Networking {
+    val CHANNEL: NetworkChannel = NetworkChannel.create({{ classname }}.id("networking_channel"))
+
+    fun init() {
+        for (subclass in {{ classname }}MessageCompanion::class.sealedSubclasses) {
+            subclass.objectInstance?.register(CHANNEL)
+        }
+    }
+}
