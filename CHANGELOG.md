@@ -1,5 +1,11 @@
 # Changelog
 
+## `2.0.3` - 2025-06-19
+
+### Additions
+
+- Added a message to be printed after generating the project with a reminder about the next steps to complete.
+
 ## `2.0.2` - 2025-06-16
 
 ### Additions

@@ -151,3 +151,9 @@ _envops:
   keep_trailing_newline: true
   trim_blocks: true
   lstrip_blocks: true
+
+_message_after_copy: |-
+  Next steps:
+  1. Make ./gradlew executable: git update-index --chmod=+x gradlew
+  2. Add and commit all of the newly created files.
+  3. Set up GitHub Pages: https://hexdoc.hexxy.media/docs/guides/deployment/github-pages
