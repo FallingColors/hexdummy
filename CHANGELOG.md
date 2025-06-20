@@ -1,5 +1,11 @@
 # Changelog
 
+## `2.0.4` - 2025-06-19
+
+### Changes
+
+- Added a 10-minute timeout to the client and server test jobs, since HeadlessMC seems to just hang sometimes.
+
 ## `2.0.3` - 2025-06-19
 
 ### Additions
