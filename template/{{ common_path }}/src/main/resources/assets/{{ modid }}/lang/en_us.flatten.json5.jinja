@@ -39,5 +39,30 @@
     {{ modid }}: {
       congrats: "Tell %1$s they're doing a good job!",
     },
+
+    "autoconfig.{{ modid }}": {
+      title: "{{ display_name }} Config",
+
+      category: {
+        client: "Client",
+        server: "Server",
+      },
+
+      option: {
+        client: {
+          dummyClientConfigOption: {
+            "": "Dummy Client Config Option",
+            "@Tooltip": "This is an example of a client-side config option that accepts a boolean.",
+          },
+        },
+
+        server: {
+          dummyServerConfigOption: {
+            "": "Dummy Server Config Option",
+            "@Tooltip": "This is an example of a server-side config option that accepts an integer.",
+          },
+        },
+      },
+    },
   },
 }

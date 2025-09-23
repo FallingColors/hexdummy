@@ -1,0 +1,11 @@
+package {{ kotlin_package }}.forge
+
+import {{ kotlin_package }}.{{ classname }}
+import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent
+
+object Forge{{ classname }}Server {
+    @Suppress("UNUSED_PARAMETER")
+    fun init(event: FMLDedicatedServerSetupEvent) {
+        {{ classname }}.initServer()
+    }
+}

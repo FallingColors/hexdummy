@@ -13,6 +13,7 @@ class Forge{{ classname }} {
             EventBuses.registerModEventBus({{ classname }}.MODID, this)
             addListener(Forge{{ classname }}Client::init)
             addListener(Forge{{ classname }}Datagen::init)
+            addListener(Forge{{ classname }}Server::init)
         }
         {{ classname }}.init()
     }

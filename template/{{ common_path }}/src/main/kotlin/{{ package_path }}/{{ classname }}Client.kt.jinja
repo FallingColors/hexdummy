@@ -1,16 +1,15 @@
 package {{ kotlin_package }}
 
-import {{ kotlin_package }}.config.{{ classname }}Config
-import {{ kotlin_package }}.config.{{ classname }}Config.GlobalConfig
+import {{ kotlin_package }}.config.{{ classname }}ClientConfig
 import me.shedaniel.autoconfig.AutoConfig
 import net.minecraft.client.gui.screens.Screen
 
 object {{ classname }}Client {
     fun init() {
-        {{ classname }}Config.initClient()
+        {{ classname }}ClientConfig.init()
     }
 
     fun getConfigScreen(parent: Screen): Screen {
-        return AutoConfig.getConfigScreen(GlobalConfig::class.java, parent).get()
+        return AutoConfig.getConfigScreen({{ classname }}ClientConfig.GlobalConfig::class.java, parent).get()
     }
 }

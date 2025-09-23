@@ -3,7 +3,7 @@ package {{ kotlin_package }}
 import net.minecraft.resources.ResourceLocation
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
-import {{ kotlin_package }}.config.{{ classname }}Config
+import {{ kotlin_package }}.config.{{ classname }}ServerConfig
 import {{ kotlin_package }}.networking.{{ classname }}Networking
 import {{ kotlin_package }}.registry.{{ classname }}Actions
 
@@ -17,10 +17,14 @@ object {{ classname }} {
     fun id(path: String) = ResourceLocation(MODID, path)
 
     fun init() {
-        {{ classname }}Config.init()
+        {{ classname }}ServerConfig.init()
         initRegistries(
             {{ classname }}Actions,
         )
         {{ classname }}Networking.init()
+    }
+
+    fun initServer() {
+        {{ classname }}ServerConfig.initServer()
     }
 }

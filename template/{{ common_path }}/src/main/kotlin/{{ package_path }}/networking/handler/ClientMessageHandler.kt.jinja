@@ -1,13 +1,13 @@
 package {{ kotlin_package }}.networking.handler
 
 import dev.architectury.networking.NetworkManager.PacketContext
-import {{ kotlin_package }}.config.{{ classname }}Config
+import {{ kotlin_package }}.config.{{ classname }}ServerConfig
 import {{ kotlin_package }}.networking.msg.*
 
 fun {{ classname }}MessageS2C.applyOnClient(ctx: PacketContext) = ctx.queue {
     when (this) {
         is MsgSyncConfigS2C -> {
-            {{ classname }}Config.onSyncConfig(serverConfig)
+            {{ classname }}ServerConfig.onSyncConfig(serverConfig)
         }
 
         // add more client-side message handlers here

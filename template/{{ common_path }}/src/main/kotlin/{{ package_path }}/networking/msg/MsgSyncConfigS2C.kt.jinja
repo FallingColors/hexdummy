@@ -1,14 +1,14 @@
 package {{ kotlin_package }}.networking.msg
 
-import {{ kotlin_package }}.config.{{ classname }}Config
+import {{ kotlin_package }}.config.{{ classname }}ServerConfig
 import net.minecraft.network.FriendlyByteBuf
 
-data class MsgSyncConfigS2C(val serverConfig: {{ classname }}Config.ServerConfig) : {{ classname }}MessageS2C {
+data class MsgSyncConfigS2C(val serverConfig: {{ classname }}ServerConfig.ServerConfig) : {{ classname }}MessageS2C {
     companion object : {{ classname }}MessageCompanion<MsgSyncConfigS2C> {
         override val type = MsgSyncConfigS2C::class.java
 
         override fun decode(buf: FriendlyByteBuf) = MsgSyncConfigS2C(
-            serverConfig = {{ classname }}Config.ServerConfig.decode(buf),
+            serverConfig = {{ classname }}ServerConfig.ServerConfig().decode(buf),
         )
 
         override fun MsgSyncConfigS2C.encode(buf: FriendlyByteBuf) {
