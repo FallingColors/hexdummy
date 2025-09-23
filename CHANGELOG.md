@@ -1,5 +1,20 @@
 # Changelog
 
+## `2.1.0` - 2025-09-23
+
+### Additions
+
+- Added an example of a great spell.
+- Added per-platform datagen, to generate tags for the example great spell.
+- Added an option to disable generating the MIT license.
+
+### Changes
+
+- Improved the setup documentation.
+- Updated the hexdoc instructions, Python dependencies, and GitHub Actions workflows to recommend using [uv](https://docs.astral.sh/uv/).
+- Updated the release workflow to skip the runtime tests, since they already run on push and take a while to run.
+- Fixed Pyright type checking settings.
+
 ## `2.0.4` - 2025-06-19
 
 ### Changes
