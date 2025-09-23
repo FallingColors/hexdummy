@@ -1,5 +1,11 @@
 # Changelog
 
+## `2.1.1` - 2025-09-23
+
+### Fixes
+
+- Fixed an invalid workflow error for the `build.yml` workflow.
+
 ## `2.1.0` - 2025-09-23
 
 ### Additions
