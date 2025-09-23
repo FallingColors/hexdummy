@@ -15,14 +15,14 @@ authors = [
     { name="{{ github_user }}" },
 ]
 keywords = ["hexdoc"]
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dynamic = ["version", "dependencies", "optional-dependencies"]
 
 [project.urls]
 Homepage = "{{ homepage_url }}"
 Source = "{{ sources_url }}"
 
-# Gradle version/deps
+# project version
 
 [tool.hatch.version]
 scheme = "gradle"
@@ -33,14 +33,18 @@ key = "modVersion"
 gradle-version-regex = { regex='^(.+?)(-.+)?$', repl='\1.{minecraftVersion}\2' }
 {% endif %}
 
+# Python dependencies
+
+# required
 [tool.hatch.metadata.hooks.version-catalog]
 dependencies = [
     { package="hexdoc-hexcasting", op="~=", py-version="1.0", key="hexcasting" },
 ]
 
-[tool.hatch.metadata.hooks.version-catalog.optional-dependencies]
+# dev-only
+[dependency-groups]
 dev = [
-    "ruff~=0.11.13",
+    "ruff",
 ]
 
 # directory inclusion
@@ -48,7 +52,7 @@ dev = [
 [tool.hatch.build]
 only-include = [
     "doc/src/hexdoc_{{ modid }}",
-    "gradle.properties",
+    "gradle.properties", {# TODO: should this be removed? #}
 ]
 artifacts = [
     "/doc/src/hexdoc_{{ modid }}/_export/generated",
@@ -58,7 +62,7 @@ artifacts = [
 [tool.hatch.build.targets.wheel]
 sources = ["doc/src"]
 
-# hexdoc entry points
+# hexdoc entry point
 
 [project.entry-points.hexdoc]
 {{ modid }} = "hexdoc_{{ modid }}._hooks:{{ classname }}Plugin"
@@ -66,54 +70,44 @@ sources = ["doc/src"]
 # linting
 
 [tool.pyright]
-pythonVersion = "3.11"
+pythonVersion = "3.12"
 pythonPlatform = "All"
 
 include = ["doc/src"]
 extraPaths = ["doc/src"]
 
-typeCheckingMode = "basic"
+typeCheckingMode = "standard"
 
 strictDictionaryInference = true
 strictListInference = true
 strictSetInference = true
 
-reportAssertAlwaysTrue = "error"
 reportConstantRedefinition = "error"
-reportDeprecated = "error"
-reportDuplicateImport = "error"
-reportFunctionMemberAccess = "error"
-reportIncompatibleMethodOverride = "error"
-reportIncompatibleVariableOverride = "error"
 reportIncompleteStub = "error"
 reportInconsistentConstructor = "error"
-reportInvalidStringEscapeSequence = "error"
 reportInvalidStubStatement = "error"
-reportInvalidTypeVarUse = "error"
-reportMatchNotExhaustive = "error"
-reportMissingParameterType = "error"
-reportMissingTypeStubs = "error"
-reportOverlappingOverload = "error"
-reportSelfClsParameterName = "error"
-reportTypeCommentUsage = "error"
-reportUnknownParameterType = "error"
-reportUnnecessaryCast = "error"
-reportUnnecessaryContains = "error"
-reportUnsupportedDunderAll = "error"
-reportUntypedBaseClass = "error"
-reportUntypedClassDecorator = "error"
-reportUntypedFunctionDecorator = "error"
-reportUntypedNamedTuple = "error"
-reportWildcardImportFromLibrary = "error"
 
+reportDeprecated = "warning"
+reportDuplicateImport = "warning"
+reportMatchNotExhaustive = "warning"
+reportMissingParameterType = "warning"
 reportMissingTypeArgument = "warning"
+reportMissingTypeStubs = "warning"
 reportPrivateUsage = "warning"
+reportTypeCommentUsage = "warning"
 reportUnknownArgumentType = "warning"
 reportUnknownLambdaType = "warning"
 reportUnknownMemberType = "warning"
+reportUnknownParameterType = "warning"
 reportUnknownVariableType = "warning"
+reportUnnecessaryCast = "warning"
 reportUnnecessaryComparison = "warning"
+reportUnnecessaryContains = "warning"
 reportUnnecessaryIsInstance = "warning"
+reportUntypedBaseClass = "warning"
+reportUntypedClassDecorator = "warning"
+reportUntypedFunctionDecorator = "warning"
+reportUntypedNamedTuple = "warning"
 reportUnusedClass = "warning"
 reportUnusedExpression = "warning"
 reportUnusedFunction = "warning"

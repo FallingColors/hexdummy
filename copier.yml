@@ -33,7 +33,7 @@ github_repo:
 java_package:
   type: str
   help: Base Java package (eg. net.minecraft, at.petrak.hexcasting)
-  default: "io.github.{{ github_user|lower }}.{{ modid }}"
+  default: "io.github.{{ github_user|lower|replace('-', '_') }}.{{ modid }}"
   validator: |
     {%- import "macros/validators.jinja" as validators -%}
     {{- validators.not_empty(java_package) -}}
@@ -42,7 +42,9 @@ java_package:
 # FIXME: most/all of the source files are currently written with Mojmap and still need to be updated using the mappings macros
 mappings_name:
   type: str
-  help: "Mappings (WARNING: Yarn is currently only partially supported by HexDummy! Mojmap is highly recommended for now, unless you really know what you're doing)"
+  help: |
+    Mappings (WARNING: Yarn is currently only partially supported by HexDummy!
+    Mojmap is highly recommended for now, unless you really know what you're doing)
   choices:
     - Mojmap
     - Yarn
@@ -56,6 +58,11 @@ mod_version:
 minecraft_version_in_mod_version:
   type: bool
   help: Include Minecraft version in mod version? (eg. v{{ mod_version }}+1.20.1)
+  default: true
+
+mit_license:
+  type: bool
+  help: Use the MIT license? (If not, you should add a license manually.)
   default: true
 
 advanced:
@@ -154,6 +161,15 @@ _envops:
 
 _message_after_copy: |-
   Next steps:
-  1. Make ./gradlew executable: git update-index --chmod=+x gradlew
-  2. Add and commit all of the newly created files.
-  3. Set up GitHub Pages: https://hexdoc.hexxy.media/docs/guides/deployment/github-pages
+  1. Look through the generated project to make sure everything looks good.
+  2. Set up your Python environment and lockfile:
+       uv sync
+  3. Add the generated files (including uv.lock) to Git:
+       git add .
+  4. Make ./gradlew executable:
+       git update-index --chmod=+x gradlew
+  5. Commit and push:
+       git commit -m "Set up mod template"
+       git push
+  6. Set up GitHub Pages: https://hexdoc.hexxy.media/docs/guides/deployment/github-pages
+  7. Set up the release workflow: https://github.com/FallingColors/hexdummy#usage

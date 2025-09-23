@@ -18,6 +18,9 @@ on:
       dry_run:
         type: boolean
         required: true
+      skip_tests:
+        type: boolean
+        required: true
   workflow_dispatch:
 
 permissions:
@@ -63,6 +66,7 @@ jobs:
           if-no-files-found: error
 
   test-mod:
+    if: !inputs.skip_tests
     needs: build-mod
     strategy:
       fail-fast: false
@@ -174,9 +178,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: hexdoc-dev/actions/setup@v1
+      - uses: actions/setup-python@v6
         with:
-          python-version: 3.11
+          python-version-file: .python-version
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          activate-environment: true
+          enable-cache: true
+
+      - name: Sync dependencies
+        run: uv sync --frozen --no-dev
 
       - id: build
         uses: hexdoc-dev/actions/build@v1
@@ -199,10 +211,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: hexdoc-dev/actions/setup@v1
+      - uses: actions/setup-python@v6
         with:
-          python-version: 3.11
-        
+          python-version-file: .python-version
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          activate-environment: true
+          enable-cache: true
+
+      - name: Sync dependencies
+        run: uv sync --frozen --no-dev
+
       - name: Merge new hexdoc build into existing book
         uses: hexdoc-dev/actions/merge@v1
         with:

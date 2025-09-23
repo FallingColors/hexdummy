@@ -17,17 +17,14 @@ For example:
 
 ## Setup
 
-Install Python 3.11.
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then:
 
 ```sh
-python3.11 -m venv venv
+uv sync
 
-.\venv\Scripts\activate   # Windows
-. venv/bin/activate.fish  # fish
-source venv/bin/activate  # everything else
-
-# run from the repo root, not doc/
-pip install -e .[dev]
+.\.venv\Scripts\activate   # Windows
+. .venv/bin/activate.fish  # fish
+source .venv/bin/activate  # everything else
 ```
 
 ## Usage
@@ -43,6 +40,9 @@ GITHUB_PAGES_URL={{ sources_url }}
 Useful commands:
 
 ```sh
+# update your Python environment and lockfile if you added new dependencies
+uv sync
+
 # show help
 hexdoc -h
 
