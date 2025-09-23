@@ -23,6 +23,10 @@
       "adapter": "kotlin",
       "value": "io.github.fallingcolors.hexdummy.fabric.FabricHexDummyClient"
     }],
+    "fabric-datagen": [{
+      "adapter": "kotlin",
+      "value": "io.github.fallingcolors.hexdummy.fabric.datagen.FabricHexDummyDatagen"
+    }],
     "modmenu": [{
       "adapter": "kotlin",
       "value": "io.github.fallingcolors.hexdummy.fabric.FabricHexDummyModMenu"
