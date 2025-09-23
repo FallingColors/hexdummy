@@ -21,6 +21,10 @@
 - Updated the release workflow to skip the runtime tests, since they already run on push and take a while to run.
 - Fixed Pyright type checking settings.
 
+### Fixes
+
+- Fixed an error introduced in a recent Copier version where the copy command would fail if the default `java_package` value was invalid.
+
 ## `2.0.4` - 2025-06-19
 
 ### Changes
