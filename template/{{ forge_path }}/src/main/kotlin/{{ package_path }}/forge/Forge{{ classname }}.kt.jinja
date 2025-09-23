@@ -2,30 +2,18 @@ package {{ kotlin_package }}.forge
 
 import dev.architectury.platform.forge.EventBuses
 import {{ kotlin_package }}.{{ classname }}
-import net.minecraft.data.DataProvider
-import net.minecraft.data.DataProvider.Factory
-import net.minecraft.data.PackOutput
-import net.minecraftforge.data.event.GatherDataEvent
+import {{ kotlin_package }}.forge.datagen.Forge{{ classname }}Datagen
 import net.minecraftforge.fml.common.Mod
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 
 @Mod({{ classname }}.MODID)
-class {{ classname }}Forge {
+class Forge{{ classname }} {
     init {
         MOD_BUS.apply {
             EventBuses.registerModEventBus({{ classname }}.MODID, this)
             addListener(Forge{{ classname }}Client::init)
-            addListener(::gatherData)
+            addListener(Forge{{ classname }}Datagen::init)
         }
         {{ classname }}.init()
     }
-
-    private fun gatherData(event: GatherDataEvent) {
-        event.apply {
-            // TODO: add datagen providers here
-        }
-    }
 }
-
-fun <T : DataProvider> GatherDataEvent.addProvider(run: Boolean, factory: (PackOutput) -> T) =
-    generator.addProvider(run, Factory { factory(it) })

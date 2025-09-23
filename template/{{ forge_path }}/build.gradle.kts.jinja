@@ -20,17 +20,24 @@ loom {
     }
 
     runs {
-        register("commonDatagen") {
-            data()
-            programArgs(
-                "--mod", modId,
-                "--all",
-                // we use forge to do the common datagen because fabric's datagen kind of sucks
-                "--output", project(":{{ common_path }}").file("src/generated/resources").absolutePath,
-                "--existing", file("src/main/resources").absolutePath,
-                "--existing", project(":{{ common_path }}").file("src/main/resources").absolutePath,
-            )
-            property("{{ modid }}.apply-datagen-mixin", "true")
+        for ((platform, outputProject) in arrayOf(
+            // we're using forge to do the common datagen because fabric's datagen kind of sucks
+            "common" to project(":{{ common_path }}"),
+            "forge" to project,
+        )) {
+            register("${platform}Datagen") {
+                data()
+                programArgs(
+                    "--mod", modId,
+                    "--all",
+                    "--output", outputProject.file("src/generated/resources").absolutePath,
+                    "--existing", file("src/main/resources").absolutePath,
+                    "--existing", project(":{{ common_path }}").file("src/main/resources").absolutePath,
+                    "--existing-mod", "hexcasting",
+                )
+                property("{{ modid }}.apply-datagen-mixin", "true")
+                property("{{ modid }}.$platform-datagen", "true")
+            }
         }
     }
 }
@@ -84,12 +91,5 @@ dependencies {
 tasks {
     shadowJar {
         exclude("fabric.mod.json")
-    }
-
-    named("runCommonDatagen") {
-        doFirst {
-            // avoid keeping stale generated resources
-            project(":{{ common_path }}").delete("src/generated/resources")
-        }
     }
 }

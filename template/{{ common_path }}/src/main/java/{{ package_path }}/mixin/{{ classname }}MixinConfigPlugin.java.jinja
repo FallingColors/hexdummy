@@ -1,4 +1,4 @@
-package {{ java_package }}.forge.mixin;
+package {{ java_package }}.mixin;
 
 import {{ java_package }}.{{ classname }};
 import org.objectweb.asm.tree.ClassNode;
@@ -9,13 +9,13 @@ import java.util.List;
 import java.util.Set;
 
 // disable MixinDatagenMain if we're not running the datagen task, since it's not necessary at any other time
-public class ForgeMixinConfigPlugin implements IMixinConfigPlugin {
+public class {{ classname }}MixinConfigPlugin implements IMixinConfigPlugin {
     @Override
     public boolean shouldApplyMixin(String targetClassName, String mixinClassName) {
-        if (mixinClassName.equals("{{ java_package }}.forge.mixin.MixinDatagenMain")) {
+        if (mixinClassName.equals("{{ java_package }}.mixin.MixinDatagenMain")) {
             var shouldApply = System.getProperty("{{ modid }}.apply-datagen-mixin", "false").equals("true");
             if (shouldApply) {
-                {{ classname }}.LOGGER.warn("Applying scuffed datagen mixin. This should not happen if not running datagen!");
+                {{ classname }}.LOGGER.warn("Applying datagen mixin to {}. This should not happen if not running datagen!", targetClassName);
             }
             return shouldApply;
         }

@@ -8,6 +8,12 @@
             congratulate: "Remove an entity from the stack, then congratulate them.",
           },
         },
+        great_spells: {
+          dummy_great_spells: {
+            "": "Dummy Great Spells",
+            "congratulate/great": "Same as $(l:patterns/spells/dummy_spells#{{ modid }}:congratulate)$(action)Congratulate/$, but as a great spell.",
+          },
+        },
       },
     },
   },
@@ -16,6 +22,7 @@
     action: {
       "{{ modid }}:": {
         congratulate: "Congratulate Player",
+        "congratulate/great": "Great Congrats!",
       },
 
       // use this to add shortened versions of pattern names if the full name won't fit in the ingame book

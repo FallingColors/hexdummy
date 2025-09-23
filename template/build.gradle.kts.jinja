@@ -20,6 +20,8 @@ architectury {
 
 tasks {
     register("runAllDatagen") {
+        dependsOn(":{{ fabric_path }}:runDatagen")
         dependsOn(":{{ forge_path }}:runCommonDatagen")
+        dependsOn(":{{ forge_path }}:runForgeDatagen")
     }
 }

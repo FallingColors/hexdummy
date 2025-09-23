@@ -1,12 +1,16 @@
-package {{ java_package }}.forge.mixin;
+package {{ java_package }}.mixin;
 
 import {{ java_package }}.{{ classname }};
 import org.spongepowered.asm.mixin.Mixin;
 import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 
+{# FIXME: doesn't work if a mixin fails to apply #}
 // scuffed workaround for https://github.com/architectury/architectury-loom/issues/189
-@Mixin(net.minecraft.data.Main.class)
+@Mixin({
+    net.minecraft.data.Main.class,
+    net.minecraft.server.Main.class,
+})
 public class MixinDatagenMain {
     @WrapMethod(method = "main", remap = false)
     private static void {{ modid }}$systemExitAfterDatagenFinishes(String[] strings, Operation<Void> original) {

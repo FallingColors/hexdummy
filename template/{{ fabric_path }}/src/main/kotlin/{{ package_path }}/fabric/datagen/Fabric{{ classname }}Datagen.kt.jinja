@@ -1,0 +1,13 @@
+package {{ kotlin_package }}.fabric.datagen
+
+import {{ kotlin_package }}.datagen.{{ classname }}ActionTags
+import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
+
+object Fabric{{ classname }}Datagen : DataGeneratorEntrypoint {
+    override fun onInitializeDataGenerator(gen: FabricDataGenerator) {
+        val pack = gen.createPack()
+
+        pack.addProvider(::{{ classname }}ActionTags)
+    }
+}

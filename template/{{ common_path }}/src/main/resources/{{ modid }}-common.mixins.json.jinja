@@ -6,7 +6,9 @@
   "client": [
   ],
   "mixins": [
+    "MixinDatagenMain"
   ],
+  "plugin": "{{ java_package }}.mixin.{{ classname }}MixinConfigPlugin",
   "injectors": {
     "defaultRequire": 1
   }
