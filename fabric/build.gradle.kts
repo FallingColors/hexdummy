@@ -6,6 +6,23 @@ architectury {
     fabric()
 }
 
+fabricApi {
+    configureDataGeneration {
+        outputDirectory = file("src/generated/resources")
+        modId = providers.gradleProperty("modId")
+        strictValidation = true
+        addToResources = false
+    }
+}
+
+loom {
+    runs {
+        named("datagen") {
+            property("hexdummy.apply-datagen-mixin", "true")
+        }
+    }
+}
+
 hexdummyModDependencies {
     // expand versions in fabric.mod.json
     filesMatching.add("fabric.mod.json")

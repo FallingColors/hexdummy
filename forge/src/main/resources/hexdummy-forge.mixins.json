@@ -6,9 +6,7 @@
   "client": [
   ],
   "mixins": [
-    "MixinDatagenMain"
   ],
-  "plugin": "io.github.fallingcolors.hexdummy.forge.mixin.ForgeMixinConfigPlugin",
   "injectors": {
     "defaultRequire": 1
   }
