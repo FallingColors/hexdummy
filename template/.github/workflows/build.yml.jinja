@@ -66,7 +66,7 @@ jobs:
           if-no-files-found: error
 
   test-mod:
-    if: !inputs.skip_tests
+    if: inputs.skip_tests != true
     needs: build-mod
     strategy:
       fail-fast: false
