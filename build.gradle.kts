@@ -1,5 +1,6 @@
 plugins {
     id("hexdummy.java")
+    id("hexdummy.mod-publish")
 }
 
 val minecraftVersion: String by project
@@ -21,5 +22,17 @@ tasks {
         dependsOn(":fabric:runDatagen")
         dependsOn(":forge:runCommonDatagen")
         dependsOn(":forge:runForgeDatagen")
+    }
+}
+
+publishMods {
+    displayName = "v${project.version}"
+
+    github {
+        repository = System.getenv("GITHUB_REPOSITORY") ?: ""
+        commitish = System.getenv("GITHUB_SHA") ?: ""
+
+        // https://modmuss50.github.io/mod-publish-plugin/platforms/github/#parent-releases
+        allowEmptyFiles = true
     }
 }

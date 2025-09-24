@@ -23,6 +23,10 @@
       "adapter": "kotlin",
       "value": "io.github.fallingcolors.hexdummy.fabric.FabricHexDummyClient"
     }],
+    "server": [{
+      "adapter": "kotlin",
+      "value": "io.github.fallingcolors.hexdummy.fabric.FabricHexDummyServer"
+    }],
     "fabric-datagen": [{
       "adapter": "kotlin",
       "value": "io.github.fallingcolors.hexdummy.fabric.datagen.FabricHexDummyDatagen"
