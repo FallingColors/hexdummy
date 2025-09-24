@@ -1,5 +1,17 @@
 # Changelog
 
+## `2.2.0` - 2025-09-23
+
+### Changes
+
+- Split the example mod config into entirely separate classes for client and server configs, to allow using config option types that are only available client-side (eg. keybinds).
+- Updated [Mod Publish Plugin](https://modmuss50.github.io/mod-publish-plugin/).
+- Removed the workaround for publishing GitHub releases, switching to the new [allowEmptyFiles](https://modmuss50.github.io/mod-publish-plugin/platforms/github/#parent-releases) option instead.
+
+### Fixes
+
+- Added missing localizations for the example mod config.
+
 ## `2.1.1` - 2025-09-23
 
 ### Fixes
