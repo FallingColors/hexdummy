@@ -82,33 +82,3 @@ dependencies {
     }
     modImplementation(libs.modMenu)
 }
-
-publishMods {
-    // this fails if we do it for all projects, since the tag already exists :/
-    // see https://github.com/modmuss50/mod-publish-plugin/issues/3
-    github {
-        accessToken = System.getenv("GITHUB_TOKEN") ?: ""
-        repository = System.getenv("GITHUB_REPOSITORY") ?: ""
-        commitish = System.getenv("GITHUB_SHA") ?: ""
-
-        type = STABLE
-        displayName = "v${project.version}"
-        tagName = "v${project.version}"
-    }
-}
-
-tasks {
-    named("publishGithub") {
-        dependsOn(project(":forge").tasks.remapJar)
-
-        // we need to do this here so that it waits until forge is already configured
-        // otherwise tasks.remapJar doesn't exist yet
-        publishMods {
-            github {
-                additionalFiles.from(
-                    project(":forge").tasks.remapJar.get().archiveFile,
-                )
-            }
-        }
-    }
-}

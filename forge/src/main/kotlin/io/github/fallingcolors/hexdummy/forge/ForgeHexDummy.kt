@@ -13,6 +13,7 @@ class ForgeHexDummy {
             EventBuses.registerModEventBus(HexDummy.MODID, this)
             addListener(ForgeHexDummyClient::init)
             addListener(ForgeHexDummyDatagen::init)
+            addListener(ForgeHexDummyServer::init)
         }
         HexDummy.init()
     }

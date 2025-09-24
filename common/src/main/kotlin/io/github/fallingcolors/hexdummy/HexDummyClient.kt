@@ -1,16 +1,15 @@
 package io.github.fallingcolors.hexdummy
 
-import io.github.fallingcolors.hexdummy.config.HexDummyConfig
-import io.github.fallingcolors.hexdummy.config.HexDummyConfig.GlobalConfig
+import io.github.fallingcolors.hexdummy.config.HexDummyClientConfig
 import me.shedaniel.autoconfig.AutoConfig
 import net.minecraft.client.gui.screens.Screen
 
 object HexDummyClient {
     fun init() {
-        HexDummyConfig.initClient()
+        HexDummyClientConfig.init()
     }
 
     fun getConfigScreen(parent: Screen): Screen {
-        return AutoConfig.getConfigScreen(GlobalConfig::class.java, parent).get()
+        return AutoConfig.getConfigScreen(HexDummyClientConfig.GlobalConfig::class.java, parent).get()
     }
 }
