@@ -9,10 +9,10 @@ import kotlin.io.path.div
 
 plugins {
     id("{{ modid }}.minecraft")
+    id("{{ modid }}.mod-publish")
     id("{{ modid }}.utils.mod-dependencies")
 
     id("com.github.johnrengelman.shadow")
-    id("me.modmuss50.mod-publish-plugin")
 }
 
 val platform: String by project
@@ -91,12 +91,6 @@ tasks {
 }
 
 publishMods {
-    val isCI = (System.getenv("CI") ?: "").isNotBlank()
-    val isDryRun = (System.getenv("DRY_RUN") ?: "").isNotBlank()
-    dryRun = !isCI || isDryRun
-
-    type = STABLE
-    changelog = provider { getLatestChangelog() }
     file = tasks.remapJar.flatMap { it.archiveFile }
 
     modLoaders.add(platform)
@@ -121,16 +115,10 @@ publishMods {
         projectId = modrinthId
         minecraftVersions.add(minecraftVersion)
     }
-}
 
-val SECTION_HEADER_PREFIX = "## "
-
-fun getLatestChangelog() = rootProject.file("CHANGELOG.md").useLines { lines ->
-    lines.dropWhile { !it.startsWith(SECTION_HEADER_PREFIX) }
-        .withIndex()
-        .takeWhile { it.index == 0 || !it.value.startsWith(SECTION_HEADER_PREFIX) }
-        .joinToString("\n") { it.value }
-        .trim()
+    github {
+        parent(rootProject.tasks.named("publishGithub"))
+    }
 }
 
 fun String.capitalize() = replaceFirstChar(Char::uppercase)

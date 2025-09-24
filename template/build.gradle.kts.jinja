@@ -1,5 +1,6 @@
 plugins {
     id("{{ modid }}.java")
+    id("{{ modid }}.mod-publish")
 }
 
 {% if minecraft_version_in_mod_version %}
@@ -23,5 +24,17 @@ tasks {
         dependsOn(":{{ fabric_path }}:runDatagen")
         dependsOn(":{{ forge_path }}:runCommonDatagen")
         dependsOn(":{{ forge_path }}:runForgeDatagen")
+    }
+}
+
+publishMods {
+    displayName = "v${project.version}"
+
+    github {
+        repository = System.getenv("GITHUB_REPOSITORY") ?: ""
+        commitish = System.getenv("GITHUB_SHA") ?: ""
+
+        // https://modmuss50.github.io/mod-publish-plugin/platforms/github/#parent-releases
+        allowEmptyFiles = true
     }
 }
