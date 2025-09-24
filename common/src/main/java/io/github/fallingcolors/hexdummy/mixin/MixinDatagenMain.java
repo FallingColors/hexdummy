@@ -10,7 +10,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
     net.minecraft.data.Main.class,
     net.minecraft.server.Main.class,
 })
-public class MixinDatagenMain {
+public abstract class MixinDatagenMain {
     @WrapMethod(method = "main", remap = false)
     private static void hexdummy$systemExitAfterDatagenFinishes(String[] strings, Operation<Void> original) {
         try {
