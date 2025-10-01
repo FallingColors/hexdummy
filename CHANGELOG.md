@@ -1,5 +1,11 @@
 # Changelog
 
+## `2.2.1` - 2025-09-30
+
+### Fixes
+
+- Fixed the incorrect URL being used in the examples for `.env`.
+
 ## `2.2.0` - 2025-09-23
 
 ### Changes
