@@ -34,7 +34,7 @@ For local testing, create a file called `.env` in the repo root following this t
 ```sh
 GITHUB_REPOSITORY=FallingColors/hexdummy
 GITHUB_SHA=main
-GITHUB_PAGES_URL=https://github.com/FallingColors/hexdummy
+GITHUB_PAGES_URL=https://fallingcolors.github.io/hexdummy
 ```
 
 Useful commands:
