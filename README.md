@@ -40,7 +40,8 @@ This is an up-to-date bare-bones template for starting a multiloader Hex Casting
       - Repository name: Your GitHub repository name
       - Workflow name: `release.yml`
       - Environment name: `pypi`
-   4. When your mod is ready, [manually trigger a release](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow) through the Actions tab on GitHub.
+   4. If you'd like to publish your mod to https://maven.hexxy.media, [follow these instructions](https://gist.github.com/object-Object/f9988135bec5cef653c668712954f429) to set it up.
+   5. When your mod is ready, [manually trigger a release](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow) through the Actions tab on GitHub.
 
 Further instructions TODO - look at [HexDebug](https://github.com/object-Object/HexDebug) or [IoticBlocks](https://github.com/object-Object/IoticBlocks) for examples, since this template is based heavily on those mods.
 
