@@ -66,6 +66,24 @@ HexDummy uses [Copier](https://copier.readthedocs.io), a Python app for generati
 
 Minecraft mod releases tend to be brittle. HexDummy's release workflow includes separate inputs for each platform your mod is released to, so if some of them fail but others succeed, you can manually fix and re-release just the failing parts, rather than having to push a new tag or commit and release everything again.
 
+### What's a (ModName)Registrar? Why can't I use Architectury's DeferredRegister?
+
+Architectury's DeferredRegister [does not work with modded registries](https://github.com/architectury/architectury-api/issues/513). It's also somewhat unergonomic to use in Kotlin (in my opinion). So, HexDummy generates a Registrar base class that you can use to register things in all registries, vanilla or modded.
+
+To add a registrar for a registry, [create an `object` subclassing the registrar](https://github.com/object-Object/HexDummyExample/blob/a7d8d5b58bd018a62456e4653fe46ba3eb22bc69/common/src/main/kotlin/io/github/objectobject/hexdummyexample/registry/HexdummyexampleActions.kt#L11-L14), and pass  the ResourceKey of the registry and a callback that returns the actual registry to the superclass. (A callback is used to avoid initializing the registry too early on Forge.) Add the subclass to the [initRegistries call](https://github.com/object-Object/HexDummyExample/blob/a7d8d5b58bd018a62456e4653fe46ba3eb22bc69/common/src/main/kotlin/io/github/objectobject/hexdummyexample/Hexdummyexample.kt#L21) in your common mod initializer.
+
+Registering things with a HexDummy Registrar generally looks like this:
+
+```kt
+val REGISTERED_THING = register("registered_thing") { ThingConstructor("parameters") }
+```
+
+`register` takes a callback for the same reason as the registry object: to avoid constructing the instance too early on Forge. The string is used as the path for a ResourceLocation, with your mod id as the namespace.
+
+The value returned by `register` is an [`Entry<V>`](https://github.com/object-Object/HexDummyExample/blob/a7d8d5b58bd018a62456e4653fe46ba3eb22bc69/common/src/main/kotlin/io/github/objectobject/hexdummyexample/registry/HexdummyexampleRegistrar.kt#L50). You can use this to access the registered thing's id (`.id`) or ResourceKey (`.key`), and when you're sure registration has finished, the actual registered instance (`.value`).
+
+For a more concrete example, the template comes with an [example for registering patterns](common/src/main/kotlin/io/github/objectobject/hexdummyexample/registry/HexdummyexampleActions.kt), and HexDebug has [several more examples](Common/src/main/kotlin/gay/object/hexdebug/registry) for various types of registries.
+
 ## TODO
 
 - Finish adding Yarn support.
