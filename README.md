@@ -14,8 +14,8 @@ This is an up-to-date, minimal, opinionated template for starting a multiloader 
    - [uv](https://docs.astral.sh/uv/getting-started/installation/)
    - Any IDE with Java and Kotlin support (recommended: [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download/?section=windows))
 2. Create, clone, and enter a **new** GitHub repo.
-   > [!CAUTION]
-   > **Do not** fork/clone/copy this repo directly.
+> [!CAUTION]
+> **Do not** fork/clone/copy this repo directly.
 3. From the repo root, run this command to copy the template, then follow the prompts to set it up:
    ```sh
    uvx copier copy gh:FallingColors/hexdummy .
