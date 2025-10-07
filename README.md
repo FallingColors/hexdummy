@@ -1,6 +1,8 @@
 # HexDummy v2
 
-This is an up-to-date bare-bones template for starting a multiloader Hex Casting addon on 1.20.1 with Architectury. Includes all necessary dependencies on both Forge and Fabric loaders, plus some demo bits.
+[![powered by hexdoc](https://img.shields.io/endpoint?url=https://hexxy.media/api/v0/badge/hexdoc?label=1)](https://github.com/hexdoc-dev/hexdoc)
+
+This is an up-to-date, minimal, opinionated template for starting a multiloader Hex Casting addon on 1.20.1 with Architectury. Includes all necessary dependencies on both Forge and Fabric loaders, plus some demo bits.
 
 > [!CAUTION]
 > **Do not fork or clone this repository** to set up a new mod! See the usage steps and FAQ for more details.
