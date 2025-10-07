@@ -2,13 +2,18 @@
 
 This is an up-to-date bare-bones template for starting a multiloader Hex Casting addon on 1.20.1 with Architectury. Includes all necessary dependencies on both Forge and Fabric loaders, plus some demo bits.
 
+> [!CAUTION]
+> **Do not fork or clone this repository** to set up a new mod! See the usage steps and FAQ for more details.
+
 ## Usage
 
 1. Install the prerequisites:
    - [Git](https://github.com/git-guides/install-git)
    - [uv](https://docs.astral.sh/uv/getting-started/installation/)
    - Any IDE with Java and Kotlin support (recommended: [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download/?section=windows))
-2. Create, clone, and enter a **new** GitHub repo (**do not** fork/clone/copy this repo directly).
+2. Create, clone, and enter a **new** GitHub repo.
+   > [!CAUTION]
+   > **Do not** fork/clone/copy this repo directly.
 3. From the repo root, run this command to copy the template, then follow the prompts to set it up:
    ```sh
    uvx copier copy gh:FallingColors/hexdummy .
@@ -60,7 +65,9 @@ The following repository contains an example of a project generated using HexDum
 
 ### Why isn't this a template repository / why shouldn't I fork this repo to set up my mod?
 
-HexDummy uses [Copier](https://copier.readthedocs.io), a Python app for generating projects from *parameterized* templates. When you run `copier copy`, Copier clones this repository, prompts you for some values, then fills those values into many placeholders in the template, making a customized project with no placeholder values for you to have to replace by hand. As a consequence, this repository by itself is *not* a working Minecraft mod - if you look in the [template](./template) directory, you'll see a lot of `.jinja` files with placeholders that still need to be filled in.
+HexDummy uses [Copier](https://copier.readthedocs.io), a Python app for generating projects from *parameterized* templates. When you run `uvx copier copy`, Copier clones this repository, prompts you for some values, then fills those values into many placeholders in the template, making a customized project with no placeholder values for you to have to replace by hand.
+
+As a consequence, this repository by itself is *not* a working Minecraft mod - if you look in the [template](./template) directory, you'll see a lot of `.jinja` files with placeholders that still need to be filled in.
 
 ### Why is the release workflow triggered manually?
 
