@@ -1,5 +1,11 @@
 # Changelog
 
+## [UNRELEASED]
+
+### Changes
+
+- Updated the serialization-hooks dependency to use https://maven.hexxy.media instead of a vendored JAR.
+
 ## `2.2.1` - 2025-09-30
 
 ### Fixes
