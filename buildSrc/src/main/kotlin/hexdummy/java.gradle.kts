@@ -28,6 +28,7 @@ repositories {
     maven { url = uri("https://jitpack.io") }
     maven { url = uri("https://maven.blamejared.com") }
     maven { url = uri("https://maven.fabricmc.net/") }
+    maven { url = uri("https://maven.hexxy.media") }
     maven { url = uri("https://maven.ladysnake.org/releases") } // Cardinal Components
     maven { url = uri("https://maven.minecraftforge.net/") }
     maven { url = uri("https://maven.parchmentmc.org") }

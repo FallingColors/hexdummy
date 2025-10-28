@@ -112,7 +112,7 @@ asm-tree     = { module="org.ow2.asm:asm-tree", version.ref="asm" }
 asm-util     = { module="org.ow2.asm:asm-util", version.ref="asm" }
 
 
-serializationHooks = { module="libs:serialization-hooks", version.ref="serializationHooks" }
+serializationHooks = { module="io.github.tropheusj:serialization-hooks", version.ref="serializationHooks" }
 
 [plugins]
 kotlin-jvm = { id="org.jetbrains.kotlin.jvm", version.ref="kotlin" }
