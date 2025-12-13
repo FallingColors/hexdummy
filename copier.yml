@@ -25,6 +25,12 @@ github_user:
     {%- import "macros/validators.jinja" as validators -%}
     {{- validators.not_empty(github_user) -}}
 
+sanitized_github_user:
+  when: false
+  default: |
+    {%- set v = github_user|lower|replace('-', '_') -%}
+    {{- '_'~v if v[0].isdigit() else v -}}
+
 github_repo:
   type: str
   help: GitHub repository name
@@ -33,7 +39,7 @@ github_repo:
 java_package:
   type: str
   help: Base Java package (eg. net.minecraft, at.petrak.hexcasting)
-  default: "io.github.{{ github_user|lower|replace('-', '_') }}.{{ modid }}"
+  default: "io.github.{{ sanitized_github_user }}.{{ modid }}"
   validator: |
     {%- import "macros/validators.jinja" as validators -%}
     {{- validators.not_empty(java_package) -}}

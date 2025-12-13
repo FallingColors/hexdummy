@@ -1,5 +1,11 @@
 # Changelog
 
+## `2.2.3` - 2025-12-13
+
+### Fixes
+
+- Fixed a crash caused by the use of a GitHub username starting with a digit.
+
 ## `2.2.2` - 2025-10-27
 
 ### Changes

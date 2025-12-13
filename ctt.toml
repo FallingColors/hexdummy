@@ -12,3 +12,7 @@ mappings_name = "Mojmap"
 
 [output.".ctt/yarn"]
 mappings_name = "Yarn"
+
+[output.".ctt/leading_number_username"]
+mappings_name = "Mojmap"
+github_user = "1leadingnum"
