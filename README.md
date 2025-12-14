@@ -2,10 +2,13 @@
 
 [![powered by hexdoc](https://img.shields.io/endpoint?url=https://hexxy.media/api/v0/badge/hexdoc?label=1)](https://github.com/hexdoc-dev/hexdoc)
 
-This is an up-to-date, minimal, opinionated template for starting a multiloader Hex Casting addon on 1.20.1 with Architectury. Includes all necessary dependencies on both Forge and Fabric loaders, plus some demo bits.
+This is an up-to-date, minimal, opinionated template for starting a **multiloader, Kotlin-based** Hex Casting addon on 1.20.1 with Architectury. Includes all necessary dependencies on both Forge and Fabric loaders, plus some demo bits.
 
 > [!CAUTION]
 > **Do not fork or clone this repository** to set up a new mod! See the usage steps and FAQ for more details.
+
+> [!TIP]
+> If you're writing a Fabric-only or Forge-only mod, you probably don't need this template. Consider using the [Fabric template mod generator](https://fabricmc.net/develop/template/) or [Forge MDK](https://docs.minecraftforge.net/en/1.20.1/gettingstarted/) instead.
 
 ## Usage
 
@@ -13,14 +16,14 @@ This is an up-to-date, minimal, opinionated template for starting a multiloader 
    - [Git](https://github.com/git-guides/install-git)
    - [uv](https://docs.astral.sh/uv/getting-started/installation/)
    - Any IDE with Java and Kotlin support (recommended: [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download/?section=windows))
-2. Create, clone, and enter a **new** GitHub repo.
+2. Create, clone, and enter a **new** GitHub repo. You don't need to use any other project templates (e.g. IntelliJ's Minecraft mod template) with HexDummy.
 > [!CAUTION]
 > **Do not** fork/clone/copy this repo directly.
-3. From the repo root, run this command to copy the template, then follow the prompts to set it up:
+1. From the repo root, run this command to copy the template, then follow the prompts to set it up:
    ```sh
    uvx copier copy gh:FallingColors/hexdummy .
    ```
-4. Set up your Python environment and lockfile:
+2. Set up your Python environment and lockfile:
    ```sh
    uv sync
 
@@ -28,15 +31,15 @@ This is an up-to-date, minimal, opinionated template for starting a multiloader 
    . .venv/bin/activate.fish  # fish
    source .venv/bin/activate  # everything else
    ```
-5. Look through the generated project to make sure everything looks good, then add, commit, and push the generated files (including `uv.lock`):
+3. Look through the generated project to make sure everything looks good, then add, commit, and push the generated files (including `uv.lock`):
    ```
    git add .
    git update-index --chmod=+x gradlew
    git commit -m "Set up mod template"
    git push
    ```
-6. Follow the [hexdoc setup instructions](https://hexdoc.hexxy.media/docs/guides/deployment/github-pages) for GitHub Pages.
-7. Set up the release workflow:
+4. Follow the [hexdoc setup instructions](https://hexdoc.hexxy.media/docs/guides/deployment/github-pages) for GitHub Pages.
+5. Set up the release workflow:
    1. In your GitHub repository settings, create two new environments called `pypi` and `curseforge-modrinth`.
    2. Add the following environment secrets (**not** environment variables) to the `curseforge-modrinth` environment:
       - `CURSEFORGE_TOKEN`: Generate a new [CurseForge API token](https://authors-old.curseforge.com/account/api-tokens).
