@@ -19,11 +19,11 @@ This is an up-to-date, minimal, opinionated template for starting a **multiloade
 2. Create, clone, and enter a **new** GitHub repo. You don't need to use any other project templates (e.g. IntelliJ's Minecraft mod template) with HexDummy.
 > [!CAUTION]
 > **Do not** fork/clone/copy this repo directly.
-1. From the repo root, run this command to copy the template, then follow the prompts to set it up:
+3. From the repo root, run this command to copy the template, then follow the prompts to set it up:
    ```sh
    uvx copier copy gh:FallingColors/hexdummy .
    ```
-2. Set up your Python environment and lockfile:
+4. Set up your Python environment and lockfile:
    ```sh
    uv sync
 
@@ -31,15 +31,15 @@ This is an up-to-date, minimal, opinionated template for starting a **multiloade
    . .venv/bin/activate.fish  # fish
    source .venv/bin/activate  # everything else
    ```
-3. Look through the generated project to make sure everything looks good, then add, commit, and push the generated files (including `uv.lock`):
+5. Look through the generated project to make sure everything looks good, then add, commit, and push the generated files (including `uv.lock`):
    ```
    git add .
    git update-index --chmod=+x gradlew
    git commit -m "Set up mod template"
    git push
    ```
-4. Follow the [hexdoc setup instructions](https://hexdoc.hexxy.media/docs/guides/deployment/github-pages) for GitHub Pages.
-5. Set up the release workflow:
+6. Follow the [hexdoc setup instructions](https://hexdoc.hexxy.media/docs/guides/deployment/github-pages) for GitHub Pages.
+7. Set up the release workflow:
    1. In your GitHub repository settings, create two new environments called `pypi` and `curseforge-modrinth`.
    2. Add the following environment secrets (**not** environment variables) to the `curseforge-modrinth` environment:
       - `CURSEFORGE_TOKEN`: Generate a new [CurseForge API token](https://authors-old.curseforge.com/account/api-tokens).
