@@ -59,8 +59,8 @@ Further instructions TODO - look at [HexDebug](https://github.com/object-Object/
 
 See the following branches for up-to-date example projects generated using HexDummy:
 
-- [example/v2/mojmap](https://github.com/FallingColors/hexdummy/tree/example/mojmap)
-- [example/v2/yarn](https://github.com/FallingColors/hexdummy/tree/example/yarn)
+- [example/v2/mojmap](https://github.com/FallingColors/hexdummy/tree/example/v2/mojmap)
+- [example/v2/yarn](https://github.com/FallingColors/hexdummy/tree/example/v2/yarn)
 
 The following repository contains an example of a project generated using HexDummy, including GitHub Actions workflow runs and a hexdoc web book:
 
