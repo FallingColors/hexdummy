@@ -1,5 +1,11 @@
 # Changelog
 
+## `2.2.4` - 2025-12-28
+
+### Changes
+
+- Updated to Hex Casting 0.11.3.
+
 ## `2.2.3` - 2025-12-13
 
 ### Fixes
