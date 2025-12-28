@@ -46,7 +46,7 @@
     "fabric-api": ">=${versions.fabric_api}",
     "fabric-language-kotlin": ">=${versions.kotlin_fabric}",
     "architectury": ">=${versions.architectury}",
-    "hexcasting": ">=${versions.hexcasting_dependency}",
+    "hexcasting": ">=${versions.hexcasting}",
     "cloth-config": ">=${versions.clothConfig}"
   },
   "suggests": {
