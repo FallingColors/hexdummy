@@ -26,10 +26,7 @@ forge-dependency = "47" # for mods.toml
 
 # mods
 
-# 0.11.2-pre-701 corresponds to the build of 0.11.2 on CurseForge/Modrinth
-hexcasting = "0.11.2-pre-701"
-# FIXME: this should be 0.11.2, but that breaks the dev environment
-hexcasting-dependency = "0.11.1"
+hexcasting = "0.11.3"
 paucal = "0.6.0-pre-118"
 pkpcpbp = "0.2.0-pre-95"
 
