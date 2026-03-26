@@ -74,6 +74,16 @@ HexDummy uses [Copier](https://copier.readthedocs.io), a Python app for generati
 
 As a consequence, this repository by itself is *not* a working Minecraft mod - if you look in the [template](./template) directory, you'll see a lot of `.jinja` files with placeholders that still need to be filled in.
 
+### How do I add dependencies?
+
+- Maven repositories: `buildSrc/src/main/kotlin/java.gradle.kts`
+- Dependency definitions: `gradle/libs.versions.toml` ([Gradle docs](https://docs.gradle.org/current/userguide/version_catalogs.html#sec::toml-dependencies-format))
+- Gradle dependency configurations: `{common,fabric,forge}/build.gradle.kts` (depending which platform you need it on)
+- hexdoc dependencies: `pyproject.toml` and `doc/hexdoc.toml` (remember to run `uv sync` to update `uv.lock` after changing)
+- Local JAR dependency files: `libs/`
+- Maven repositories for Gradle plugins: `settings.gradle.kts`
+- Maven repositories and Gradle dependency configurations specifically for Gradle plugins used by the convention plugins in `buildSrc`: `buildSrc/build.gradle.kts`
+
 ### Why is the release workflow triggered manually?
 
 Minecraft mod releases tend to be brittle. HexDummy's release workflow includes separate inputs for each platform your mod is released to, so if some of them fail but others succeed, you can manually fix and re-release just the failing parts, rather than having to push a new tag or commit and release everything again.
